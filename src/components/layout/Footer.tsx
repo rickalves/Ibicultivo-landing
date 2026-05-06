@@ -27,7 +27,7 @@ export default function Footer() {
       </a>
 
       <span style={{ fontSize: "0.76rem", color: "rgba(255,255,255,0.3)" }}>
-        © 2025 Ibicultivo · Guaraciaba do Norte — CE
+        © 2026 Ibicultivo · Guaraciaba do Norte — CE
       </span>
 
       <div style={{ display: "flex", gap: "2rem" }}>
