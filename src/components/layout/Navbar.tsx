@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Navbar() {
@@ -35,28 +36,14 @@ export default function Navbar() {
       }}
     >
       {/* Logo */}
-      <Link href="#" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem" }}>
-        <span
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "1.55rem",
-            fontWeight: 700,
-            color: "#235025",
-            letterSpacing: "-0.02em",
-          }}
-        >
-          Ibicultivo
-        </span>
-        <span
-          className="animate-breathe"
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: "50%",
-            background: "#E8962A",
-            marginTop: 2,
-            display: "inline-block",
-          }}
+      <Link href="#" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+        <Image
+          src="/logo.svg"
+          alt="Ibicultivo"
+          width={120}
+          height={72}
+          priority
+          style={{ height: 72, width: "auto" }}
         />
       </Link>
 
@@ -75,7 +62,7 @@ export default function Navbar() {
       </div>
 
       {/* Actions */}
-      <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+      <div className="navbar-actions" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
         <a
           href="#"
           style={{
@@ -90,6 +77,7 @@ export default function Navbar() {
           }}
           onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(45,107,48,0.06)")}
           onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+          className="navbar-btn-secondary"
         >
           Entrar
         </a>

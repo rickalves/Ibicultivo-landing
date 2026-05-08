@@ -17,8 +17,8 @@ export default function TecnicoBlock() {
       {/* Photo */}
       <div className="tec-photo" style={{ position: "relative", overflow: "hidden", minHeight: 400 }}>
         <Image
-          src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&q=80&fit=crop&crop=top"
-          alt="Técnico agrícola em campo"
+          src="/images/plantacao-tomate.jpg"
+          alt="Plantação de tomate na Serra da Ibiapaba"
           fill
           style={{ objectFit: "cover", objectPosition: "center top" }}
         />

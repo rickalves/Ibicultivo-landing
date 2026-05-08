@@ -8,6 +8,7 @@ import { proofItems } from "@/lib/constants";
 export default function Hero() {
   return (
     <section
+      className="hero-section"
       style={{
         minHeight: "100vh",
         position: "relative",
@@ -19,7 +20,7 @@ export default function Hero() {
       {/* Background image */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Image
-          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=85&fit=crop"
+          src="/images/hero.jpg"
           alt="Campo agrícola verde"
           fill
           priority
@@ -36,31 +37,21 @@ export default function Hero() {
         />
       </div>
 
-      {/* Bottom fade */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: 200,
-          zIndex: 1,
-          background: "linear-gradient(to top, #FAF7F2, transparent)",
-        }}
-      />
-
       {/* Content */}
       <div
+        className="hero-content"
         style={{
           position: "relative",
           zIndex: 2,
           padding: "0 5%",
           paddingTop: 90,
+          paddingBottom: 16,
           maxWidth: 780,
         }}
       >
         {/* Eyebrow */}
         <div
+        className="hero-Eyebrow"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -78,13 +69,20 @@ export default function Hero() {
             animation: "fadeUp 0.6s ease 0.1s both",
           }}
         >
-          <span className="animate-breathe-fast" style={{ width: 6, height: 6, borderRadius: "50%", background: "#F5B84A", flexShrink: 0, display: "inline-block" }} />
+          <span className="animate-breathe-fast" style={{ 
+            width: 6, 
+            height: 6, 
+            borderRadius: "50%", 
+            background: "#F5B84A", 
+            flexShrink: 0, 
+            display: "inline-block" }} />
           <FontAwesomeIcon icon={faLocationDot} />
           Feito na Serra da Ibiapaba — Ceará
         </div>
 
         {/* H1 */}
         <h1
+          className="hero-title"
           style={{
             fontFamily: "var(--font-cormorant), serif",
             fontSize: "clamp(3rem, 6.5vw, 5.8rem)",
@@ -107,6 +105,7 @@ export default function Hero() {
 
         {/* Sub */}
         <p
+          className="hero-sub"
           style={{
             fontSize: "1.1rem",
             fontWeight: 300,
@@ -123,6 +122,7 @@ export default function Hero() {
 
         {/* CTAs */}
         <div
+          className="hero-ctas"
           style={{
             display: "flex",
             gap: "1rem",
@@ -192,6 +192,7 @@ export default function Hero() {
 
         {/* Proof bar */}
         <div
+          className="hero-proof"
           style={{
             display: "flex",
             background: "rgba(255,255,255,0.07)",
