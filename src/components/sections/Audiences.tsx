@@ -36,7 +36,7 @@ export default function Audiences() {
             features={agricultorFeatures}
             ctaHref="#"
             ctaLabel="Começar grátis"
-            image="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?w=900&q=80&fit=crop"
+            image="/images/agricultor.jpg"
             imageAlt="Agricultor colhendo tomate"
           />
         </RevealWrapper>
@@ -53,7 +53,7 @@ export default function Audiences() {
             features={tecnicoFeatures}
             ctaHref="#planos"
             ctaLabel="Ver plano Cooperativa"
-            image="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=80&fit=crop"
+            image="/images/tecnico-tablet.jpg"
             imageAlt="Técnico agrícola com tablet"
           />
         </RevealWrapper>

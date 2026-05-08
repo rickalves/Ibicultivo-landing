@@ -47,7 +47,7 @@ export default function Sobre() {
             <div style={{ paddingLeft: "2rem", display: "flex", alignItems: "center", gap: "1rem" }}>
               <div style={{ width: 48, height: 48, borderRadius: "50%", overflow: "hidden", border: "2px solid #82C987", flexShrink: 0, position: "relative" }}>
                 <Image
-                  src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=80&fit=crop&crop=face"
+                  src="/images/avatar-agricultor.jpg"
                   alt="Produtor Francisco Alves"
                   fill
                   style={{ objectFit: "cover" }}

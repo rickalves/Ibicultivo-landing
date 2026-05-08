@@ -23,7 +23,7 @@ export default function CtaFinal() {
       {/* Background image */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Image
-          src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1800&q=80&fit=crop"
+          src="/images/cta-verduras.jpg"
           alt="Campo agrícola ao entardecer"
           fill
           style={{ objectFit: "cover", objectPosition: "center" }}

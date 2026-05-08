@@ -28,7 +28,7 @@ export default function Plans() {
         </div>
       </RevealWrapper>
 
-      <div className="plans-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.5rem", maxWidth: 980, margin: "0 auto" }}>
+      <div className="plans-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3rem", maxWidth: 1200, margin: "0 auto" }}>
         {plans.map((plan, i) => (
           <RevealWrapper key={plan.type} delay={(i + 1) as 1 | 2 | 3}>
             <PlanCard plan={plan} />

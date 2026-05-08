@@ -7,7 +7,7 @@ export default function SerraBlock() {
       {/* Background image */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <Image
-          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1800&q=85&fit=crop"
+          src="/images/serra-paisagem.jpg"
           alt="Paisagem da Serra da Ibiapaba"
           fill
           style={{ objectFit: "cover", objectPosition: "center" }}

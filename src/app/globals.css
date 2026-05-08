@@ -244,6 +244,25 @@ body::before {
   .number-display { grid-template-columns: 1fr 1fr !important; }
   .nav-links-group { display: none !important; }
   .tec-photo { min-height: 300px; }
+
+  /* Navbar */
+  .navbar-btn-secondary { display: none !important; }
+
+  /* Hero */
+  .hero-section { width: 100%; }
+  .hero-content {
+    padding-top: 100px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  .hero-ctas { flex-direction: column !important; }
+  .hero-ctas a { width: 100%; justify-content: center; box-sizing: border-box; }
+  .hero-proof { width: 100% !important; flex-wrap: wrap; box-sizing: border-box; }
+  .hero-proof > div { flex: 1 1 40%; }
+  .hero-Eyebrow { font-size: 0.75rem !important; }
+  .hero-title { text-align: center!important; }
+  .hero-sub { text-align: center!important; }
 }
 
 body {
