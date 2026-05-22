@@ -28,39 +28,14 @@ export default function ScoreRing() {
   }, []);
 
   return (
-    <div
-      ref={ringRef}
-      style={{ width: 90, height: 90, position: "relative", marginBottom: "0.8rem" }}
-    >
-      <svg
-        viewBox="0 0 90 90"
-        style={{ width: "100%", height: "100%", transform: "rotate(-90deg)" }}
-      >
+    <div ref={ringRef} className="relative mb-[0.8rem] size-[90px]">
+      <svg viewBox="0 0 90 90" className="size-full -rotate-90">
         <circle className="score-track" cx="45" cy="45" r="35" />
         <circle ref={fillRef} className="score-fill" cx="45" cy="45" r="35" />
       </svg>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "1.5rem",
-            fontWeight: 700,
-            color: "#235025",
-            lineHeight: 1,
-          }}
-        >
-          92
-        </span>
-        <span style={{ fontSize: "0.58rem", color: "#5A6B5C" }}>/ 100</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <span className="font-serif text-[1.5rem] leading-none font-bold text-g700">92</span>
+        <span className="text-[0.58rem] text-muted">/ 100</span>
       </div>
     </div>
   );

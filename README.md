@@ -17,14 +17,14 @@ A página é construída com foco em performance, acessibilidade e design editor
 
 ## Stack
 
-| Tecnologia | Versão |
-|---|---|
-| [Next.js](https://nextjs.org) | 16.x (App Router) |
-| [React](https://react.dev) | 19.x |
-| [TypeScript](https://www.typescriptlang.org) | 5.x |
-| [Tailwind CSS](https://tailwindcss.com) | 4.x |
-| [Font Awesome](https://fontawesome.com) | 7.x |
-| Google Fonts | Cormorant Garamond + Outfit |
+| Tecnologia                                   | Versão                      |
+| -------------------------------------------- | --------------------------- |
+| [Next.js](https://nextjs.org)                | 16.x (App Router)           |
+| [React](https://react.dev)                   | 19.x                        |
+| [TypeScript](https://www.typescriptlang.org) | 5.x                         |
+| [Tailwind CSS](https://tailwindcss.com)      | 4.x                         |
+| [Font Awesome](https://fontawesome.com)      | 7.x                         |
+| Google Fonts                                 | Cormorant Garamond + Outfit |
 
 ---
 
@@ -93,18 +93,18 @@ npm run lint
 
 ## Seções da landing page
 
-| Seção | Âncora | Descrição |
-|---|---|---|
-| Hero | — | Headline principal, prova social e CTAs |
-| Marquee Strip | — | Faixa contínua com funcionalidades-chave |
-| Funcionalidades | `#funcionalidades` | Cards do agricultor e do técnico |
-| Como funciona | `#como` | Passo a passo em 4 etapas |
-| App Preview | — | Bento grid com mockup do painel |
-| Serra da Ibiapaba | — | Contexto e números da região |
-| Técnico Agrícola | — | Bloco dedicado ao perfil técnico |
-| Planos | `#planos` | Gratuito · Pro · Cooperativa |
-| Sobre | `#sobre` | História e origem do produto |
-| CTA Final | `#contato` | Chamada para criação de conta |
+| Seção             | Âncora             | Descrição                                |
+| ----------------- | ------------------ | ---------------------------------------- |
+| Hero              | —                  | Headline principal, prova social e CTAs  |
+| Marquee Strip     | —                  | Faixa contínua com funcionalidades-chave |
+| Funcionalidades   | `#funcionalidades` | Cards do agricultor e do técnico         |
+| Como funciona     | `#como`            | Passo a passo em 4 etapas                |
+| App Preview       | —                  | Bento grid com mockup do painel          |
+| Serra da Ibiapaba | —                  | Contexto e números da região             |
+| Técnico Agrícola  | —                  | Bloco dedicado ao perfil técnico         |
+| Planos            | `#planos`          | Gratuito · Pro · Cooperativa             |
+| Sobre             | `#sobre`           | História e origem do produto             |
+| CTA Final         | `#contato`         | Chamada para criação de conta            |
 
 ---
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -17,42 +17,31 @@ export default function Navbar() {
   return (
     <nav
       id="navbar"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 500,
-        height: "68px",
-        padding: "0 5%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        background: "rgba(250,247,242,0.9)",
-        backdropFilter: "blur(20px) saturate(180%)",
-        borderBottom: "1px solid rgba(45,107,48,0.12)",
-        transition: "box-shadow 0.3s",
-        boxShadow: scrolled ? "0 4px 24px rgba(15,32,16,0.08)" : "none",
-      }}
+      className={cn(
+        "fixed top-0 right-0 left-0 z-[500] flex h-[68px] items-center justify-between px-[5%]",
+        "border-b border-g600/12 bg-cream/90 backdrop-blur-[20px] backdrop-saturate-[180%]",
+        "transition-shadow duration-300",
+        scrolled && "shadow-[0_4px_24px_rgba(15,32,16,0.08)]"
+      )}
     >
       {/* Logo */}
-      <Link href="#" style={{ textDecoration: "none", display: "flex", alignItems: "center" }}>
+      <Link href="#" className="flex items-center no-underline">
         <Image
           src="/logo.svg"
           alt="Ibicultivo"
           width={120}
           height={72}
           priority
-          style={{ height: 72, width: "auto" }}
+          className="h-[72px] w-auto"
         />
       </Link>
 
       {/* Nav links */}
-      <div className="nav-links-group" style={{ display: "flex", gap: "2.5rem" }}>
+      <div className="nav-links-group flex gap-10">
         {[
           { href: "#funcionalidades", label: "Funcionalidades" },
           { href: "#como", label: "Como funciona" },
-          { href: "#planos", label: "Planos" },
+          { href: "#piloto", label: "Piloto" },
           { href: "#sobre", label: "Sobre" },
         ].map(({ href, label }) => (
           <a key={href} href={href} className="nav-link">
@@ -62,50 +51,18 @@ export default function Navbar() {
       </div>
 
       {/* Actions */}
-      <div className="navbar-actions" style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+      <div className="flex items-center gap-3">
         <a
-          href="#"
-          style={{
-            fontSize: "0.88rem",
-            fontWeight: 500,
-            color: "#235025",
-            padding: "0.5rem 1.2rem",
-            borderRadius: "var(--r-sm)",
-            border: "1.5px solid rgba(45,107,48,0.25)",
-            textDecoration: "none",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(45,107,48,0.06)")}
-          onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
-          className="navbar-btn-secondary"
+          href="https://app.ibicultivo.com.br"
+          className="navbar-btn-secondary rounded-sm border-[1.5px] border-g600/25 px-[1.2rem] py-2 text-[0.88rem] font-medium text-g700 no-underline transition-all duration-200 hover:bg-g600/[0.06]"
         >
           Entrar
         </a>
         <a
-          href="#"
-          style={{
-            fontSize: "0.88rem",
-            fontWeight: 600,
-            color: "#fff",
-            padding: "0.55rem 1.4rem",
-            borderRadius: "var(--r-sm)",
-            background: "#235025",
-            textDecoration: "none",
-            boxShadow: "0 2px 12px rgba(45,107,48,0.25)",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#2D6B30";
-            e.currentTarget.style.transform = "translateY(-1px)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(45,107,48,0.3)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "#235025";
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 2px 12px rgba(45,107,48,0.25)";
-          }}
+          href="#piloto"
+          className="rounded-sm bg-g700 px-[1.4rem] py-[0.55rem] text-[0.88rem] font-semibold text-white no-underline shadow-[0_2px_12px_rgba(45,107,48,0.25)] transition-all duration-200 hover:-translate-y-px hover:bg-g600 hover:shadow-[0_6px_20px_rgba(45,107,48,0.3)]"
         >
-          Começar grátis
+          Participar do piloto
         </a>
       </div>
     </nav>

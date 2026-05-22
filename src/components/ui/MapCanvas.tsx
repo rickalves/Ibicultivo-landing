@@ -4,69 +4,29 @@ const pins = [
   { left: "22%", top: "68%", label: "Tianguá", type: "blue" as const },
 ];
 
+const pinDotClass = {
+  orange: "animate-pin-orange bg-o400",
+  green: "animate-pin-green bg-g400",
+  blue: "bg-[#5B8ED6] shadow-[0_0_0_4px_rgba(91,142,214,0.2)]",
+};
+
 export default function MapCanvas() {
   return (
-    <div
-      style={{
-        marginTop: "1rem",
-        background: "rgba(61,140,65,0.05)",
-        border: "1px solid rgba(61,140,65,0.15)",
-        borderRadius: "var(--r-sm)",
-        minHeight: 150,
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+    <div className="relative mt-4 min-h-[150px] overflow-hidden rounded-sm border border-g500/15 bg-g500/[0.05]">
       {/* Terrain lines */}
-      <div className="t-line" style={{ top: "28%", transform: "rotate(-2deg)" }} />
-      <div className="t-line" style={{ top: "52%", opacity: 0.4, transform: "rotate(1.5deg)" }} />
-      <div className="t-line" style={{ top: "74%", opacity: 0.25, transform: "rotate(-1deg)" }} />
+      <div className="t-line top-[28%] rotate-[-2deg]" />
+      <div className="t-line top-[52%] rotate-[1.5deg] opacity-40" />
+      <div className="t-line top-[74%] rotate-[-1deg] opacity-25" />
 
       {/* Pins */}
       {pins.map(({ left, top, label, type }) => (
         <div
           key={label}
-          style={{
-            position: "absolute",
-            left,
-            top,
-            transform: "translateX(-50%)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 2,
-            zIndex: 2,
-          }}
+          className="absolute z-[2] flex -translate-x-1/2 flex-col items-center gap-[2px]"
+          style={{ left, top }}
         >
-          <div
-            className={
-              type === "orange"
-                ? "animate-pin-orange"
-                : type === "green"
-                ? "animate-pin-green"
-                : undefined
-            }
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: "50%",
-              background:
-                type === "orange" ? "#E8962A" : type === "green" ? "#5AAD5F" : "#5B8ED6",
-              boxShadow:
-                type === "blue" ? "0 0 0 4px rgba(91,142,214,0.2)" : undefined,
-            }}
-          />
-          <span
-            style={{
-              fontSize: "0.58rem",
-              fontWeight: 500,
-              color: "rgba(255,255,255,0.65)",
-              background: "rgba(0,0,0,0.45)",
-              padding: "2px 6px",
-              borderRadius: 4,
-              whiteSpace: "nowrap",
-            }}
-          >
+          <div className={`size-[10px] rounded-full ${pinDotClass[type]}`} />
+          <span className="rounded-[4px] bg-black/[0.45] px-[6px] py-[2px] text-[0.58rem] font-medium whitespace-nowrap text-white/65">
             {label}
           </span>
         </div>

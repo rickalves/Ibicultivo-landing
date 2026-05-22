@@ -2,28 +2,38 @@
 
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faLaptop, faSeedling, faChartPie, faCheck, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faLaptop,
+  faSeedling,
+  faChartPie,
+  faCheck,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
+import { cva } from "class-variance-authority";
 import RevealWrapper from "@/components/ui/RevealWrapper";
+import { cn } from "@/lib/utils";
 import { agricultorFeatures, tecnicoFeatures } from "@/lib/constants";
 
 export default function Audiences() {
   return (
-    <section id="funcionalidades" style={{ padding: "8rem 5%", background: "#FAF7F2" }}>
+    <section id="funcionalidades" className="bg-parchment px-[5%] py-32">
       <RevealWrapper>
-        <div style={{ marginBottom: "3.5rem" }}>
-          <span style={{ fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#3D8C41", marginBottom: "0.8rem", display: "block" }}>
+        <div className="mb-14">
+          <span className="mb-[0.8rem] block text-[0.74rem] font-semibold tracking-[0.12em] text-g500 uppercase">
             Para quem é o Ibicultivo
           </span>
-          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#0F1A10" }}>
-            Uma ferramenta, <em style={{ fontStyle: "italic", color: "#2D6B30" }}>dois perfis</em>, um objetivo
+          <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] leading-[1.08] font-bold tracking-[-0.03em] text-ink">
+            Uma ferramenta, <em className="text-g700 italic">dois perfis</em>, um objetivo
           </h2>
-          <p style={{ fontSize: "1rem", color: "#5A6B5C", lineHeight: 1.75, maxWidth: 520, marginTop: "0.9rem" }}>
-            Do agricultor familiar ao técnico agrícola — cada um com a interface que precisa e os dados que importam.
+          <p className="mt-[0.9rem] max-w-[520px] text-base leading-[1.75] text-muted">
+            Do agricultor familiar ao técnico agrícola — cada um com a interface que precisa e os
+            dados que importam.
           </p>
         </div>
       </RevealWrapper>
 
-      <div className="audience-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+      <div className="audience-grid grid grid-cols-2 gap-8">
         {/* Agricultor */}
         <RevealWrapper delay={1}>
           <AudCard
@@ -34,8 +44,8 @@ export default function Audiences() {
             title="Simples como anotar no caderno. Poderoso como nunca foi."
             desc="Sem complicação técnica. Cadastre seu cultivo, registre plantio e colheita, e gere um QR Code para valorizar seu produto na hora da venda."
             features={agricultorFeatures}
-            ctaHref="#"
-            ctaLabel="Começar grátis"
+            ctaHref="#piloto"
+            ctaLabel="Quero participar do piloto"
             image="/images/agricultor.jpg"
             imageAlt="Agricultor colhendo tomate"
           />
@@ -51,8 +61,8 @@ export default function Audiences() {
             title="Gerencie múltiplos produtores. Decida com dados reais."
             desc="Dashboards completos, relatórios por safra, monitoramento de insumos e apoio técnico embasado em dados confiáveis."
             features={tecnicoFeatures}
-            ctaHref="#planos"
-            ctaLabel="Ver plano Cooperativa"
+            ctaHref="#piloto"
+            ctaLabel="Quero participar do piloto"
             image="/images/tecnico-tablet.jpg"
             imageAlt="Técnico agrícola com tablet"
           />
@@ -76,116 +86,110 @@ interface AudCardProps {
   imageAlt: string;
 }
 
-function AudCard({ variant, badgeIcon, badgeLabel, bodyIcon, title, desc, features, ctaHref, ctaLabel, image, imageAlt }: AudCardProps) {
-  const isAg = variant === "agricultor";
+const badgeVariants = cva(
+  "absolute top-6 left-6 z-[2] flex items-center gap-[0.5rem] rounded-full border bg-white/10 px-4 py-[0.4rem] text-[0.72rem] font-medium tracking-[0.06em] uppercase backdrop-blur-[10px]",
+  {
+    variants: {
+      variant: {
+        agricultor: "border-g300/40 text-g200",
+        tecnico: "border-o400/40 text-o300",
+      },
+    },
+  }
+);
 
-  const accentColor = isAg ? "#82C987" : "#F5B84A";
-  const badgeBorder = isAg ? "rgba(130,201,135,0.4)" : "rgba(232,150,42,0.4)";
-  const badgeColor = isAg ? "#B8E3BB" : "#F5B84A";
-  const overlayGradient = isAg
-    ? "linear-gradient(to top, rgba(10,28,11,0.96) 0%, rgba(10,28,11,0.55) 50%, rgba(10,28,11,0.15) 100%)"
-    : "linear-gradient(to top, rgba(20,48,22,0.96) 0%, rgba(20,48,22,0.50) 50%, rgba(20,48,22,0.12) 100%)";
-  const iconBg = isAg ? "rgba(130,201,135,0.15)" : "rgba(232,150,42,0.15)";
-  const iconBorder = isAg ? "rgba(130,201,135,0.25)" : "rgba(232,150,42,0.25)";
-  const checkBg = isAg ? "rgba(130,201,135,0.2)" : "rgba(232,150,42,0.2)";
-  const ctaBg = isAg ? "#82C987" : "#E8962A";
-  const ctaColor = isAg ? "#0F2010" : "#0F1A10";
+const overlayVariants = cva("absolute inset-0", {
+  variants: {
+    variant: {
+      agricultor:
+        "bg-[linear-gradient(to_top,rgba(10,28,11,0.96)_0%,rgba(10,28,11,0.55)_50%,rgba(10,28,11,0.15)_100%)]",
+      tecnico:
+        "bg-[linear-gradient(to_top,rgba(20,48,22,0.96)_0%,rgba(20,48,22,0.50)_50%,rgba(20,48,22,0.12)_100%)]",
+    },
+  },
+});
 
+const iconBoxVariants = cva(
+  "mb-4 flex size-[48px] items-center justify-center rounded-[12px] border text-[1.2rem]",
+  {
+    variants: {
+      variant: {
+        agricultor: "border-g300/25 bg-g300/15 text-g300",
+        tecnico: "border-o400/25 bg-o400/15 text-o300",
+      },
+    },
+  }
+);
+
+const checkVariants = cva(
+  "flex size-[20px] shrink-0 items-center justify-center rounded-full text-[0.65rem]",
+  {
+    variants: {
+      variant: {
+        agricultor: "bg-g300/20 text-g300",
+        tecnico: "bg-o400/20 text-o300",
+      },
+    },
+  }
+);
+
+const ctaVariants = cva(
+  "mt-[1.6rem] inline-flex items-center gap-[0.5rem] rounded-sm px-[1.4rem] py-[0.7rem] text-[0.85rem] font-medium no-underline transition-all duration-200 hover:-translate-y-px",
+  {
+    variants: {
+      variant: {
+        agricultor:
+          "bg-g300 text-g900 hover:bg-[#6dba72] hover:shadow-[0_6px_20px_rgba(130,201,135,0.4)]",
+        tecnico:
+          "bg-o400 text-ink hover:bg-[#d4821f] hover:shadow-[0_6px_20px_rgba(232,150,42,0.45)]",
+      },
+    },
+  }
+);
+
+function AudCard({
+  variant,
+  badgeIcon,
+  badgeLabel,
+  bodyIcon,
+  title,
+  desc,
+  features,
+  ctaHref,
+  ctaLabel,
+  image,
+  imageAlt,
+}: AudCardProps) {
   return (
-    <div
-      style={{
-        borderRadius: "var(--r-xl)",
-        overflow: "hidden",
-        position: "relative",
-        minHeight: 580,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        transition: "transform 0.4s cubic-bezier(.25,.46,.45,.94), box-shadow 0.4s",
-        cursor: "default",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-6px)";
-        e.currentTarget.style.boxShadow = "0 24px 60px rgba(15,32,16,0.2)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
-      }}
-    >
+    <div className="relative flex min-h-[580px] cursor-default flex-col justify-end overflow-hidden rounded-xl transition-[transform,box-shadow] duration-[400ms] hover:-translate-y-[6px] hover:shadow-[0_24px_60px_rgba(15,32,16,0.2)]">
       {/* Image */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-        <Image src={image} alt={imageAlt} fill style={{ objectFit: "cover" }} />
-        <div style={{ position: "absolute", inset: 0, background: overlayGradient }} />
+      <div className="absolute inset-0 z-0">
+        <Image src={image} alt={imageAlt} fill className="object-cover" />
+        <div className={overlayVariants({ variant })} />
       </div>
 
       {/* Badge */}
-      <div
-        style={{
-          position: "absolute",
-          top: "1.5rem",
-          left: "1.5rem",
-          zIndex: 2,
-          background: "rgba(255,255,255,0.1)",
-          border: `1px solid ${badgeBorder}`,
-          backdropFilter: "blur(10px)",
-          color: badgeColor,
-          fontSize: "0.72rem",
-          fontWeight: 500,
-          letterSpacing: "0.06em",
-          textTransform: "uppercase",
-          padding: "0.4rem 1rem",
-          borderRadius: 100,
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-        }}
-      >
+      <div className={badgeVariants({ variant })}>
         {badgeIcon} {badgeLabel}
       </div>
 
       {/* Body */}
-      <div style={{ padding: "2rem 2.2rem 2.4rem", position: "relative", zIndex: 1 }}>
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: 12,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            marginBottom: "1rem",
-            fontSize: "1.2rem",
-            background: iconBg,
-            color: accentColor,
-            border: `1px solid ${iconBorder}`,
-          }}
-        >
-          {bodyIcon}
-        </div>
+      <div className="relative z-[1] px-[2.2rem] pt-8 pb-[2.4rem]">
+        <div className={iconBoxVariants({ variant })}>{bodyIcon}</div>
 
-        <h3
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "1.85rem",
-            fontWeight: 700,
-            color: "#fff",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            marginBottom: "0.8rem",
-          }}
-        >
+        <h3 className="mb-[0.8rem] font-serif text-[1.85rem] leading-[1.1] font-bold tracking-[-0.02em] text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.8),0_1px_4px_rgba(0,0,0,0.6)]">
           {title}
         </h3>
 
-        <p style={{ fontSize: "0.87rem", color: "rgba(255,255,255,0.58)", lineHeight: 1.7, marginBottom: "1.4rem" }}>
-          {desc}
-        </p>
+        <p className="mb-[1.4rem] text-[0.87rem] leading-[1.7] text-white/[0.58]">{desc}</p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.55rem" }}>
+        <div className="flex flex-col gap-[0.55rem]">
           {features.map((f) => (
-            <div key={f} style={{ display: "flex", alignItems: "center", gap: "0.7rem", fontSize: "0.82rem", color: "rgba(255,255,255,0.82)" }}>
-              <div style={{ width: 20, height: 20, borderRadius: "50%", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.65rem", background: checkBg, color: accentColor }}>
+            <div
+              key={f}
+              className="flex items-center gap-[0.7rem] text-[0.82rem] text-white/[0.82]"
+            >
+              <div className={checkVariants({ variant })}>
                 <FontAwesomeIcon icon={faCheck} />
               </div>
               {f}
@@ -193,35 +197,7 @@ function AudCard({ variant, badgeIcon, badgeLabel, bodyIcon, title, desc, featur
           ))}
         </div>
 
-        <a
-          href={ctaHref}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.5rem",
-            marginTop: "1.6rem",
-            fontSize: "0.85rem",
-            fontWeight: 500,
-            textDecoration: "none",
-            padding: "0.7rem 1.4rem",
-            borderRadius: "var(--r-sm)",
-            background: ctaBg,
-            color: ctaColor,
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = isAg ? "#6dba72" : "#d4821f";
-            e.currentTarget.style.transform = "translateY(-1px)";
-            e.currentTarget.style.boxShadow = isAg
-              ? "0 6px 20px rgba(130,201,135,0.4)"
-              : "0 6px 20px rgba(232,150,42,0.45)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = ctaBg;
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "none";
-          }}
-        >
+        <a href={ctaHref} className={cn(ctaVariants({ variant }))}>
           {ctaLabel} <FontAwesomeIcon icon={faArrowRight} />
         </a>
       </div>
