@@ -1,1211 +1,2328 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ibicultivo — Gestão agrícola da Serra da Ibiapaba</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-:root {
-  --g900:#0F2010; --g800:#1A3A1C; --g700:#235025;
-  --g600:#2D6B30; --g500:#3D8C41; --g400:#5AAD5F;
-  --g300:#82C987; --g200:#B8E3BB; --g100:#E8F5E9;
-  --o600:#A05A10; --o500:#C87820; --o400:#E8962A;
-  --o300:#F5B84A; --o100:#FEF3DC;
-  --cream:#FAF7F2; --parchment:#F2EDE4;
-  --ink:#0F1A10; --muted:#5A6B5C;
-  --r-sm:8px; --r-md:14px; --r-lg:24px; --r-xl:36px;
-}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ibicultivo — Gestão agrícola da Serra da Ibiapaba</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --g900: #0f2010;
+        --g800: #1a3a1c;
+        --g700: #235025;
+        --g600: #2d6b30;
+        --g500: #3d8c41;
+        --g400: #5aad5f;
+        --g300: #82c987;
+        --g200: #b8e3bb;
+        --g100: #e8f5e9;
+        --o600: #a05a10;
+        --o500: #c87820;
+        --o400: #e8962a;
+        --o300: #f5b84a;
+        --o100: #fef3dc;
+        --cream: #faf7f2;
+        --parchment: #f2ede4;
+        --ink: #0f1a10;
+        --muted: #5a6b5c;
+        --r-sm: 8px;
+        --r-md: 14px;
+        --r-lg: 24px;
+        --r-xl: 36px;
+      }
 
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: "Outfit", sans-serif;
+        background: var(--cream);
+        color: var(--ink);
+        overflow-x: hidden;
+      }
 
-body::before{
-  content:'';position:fixed;inset:0;z-index:999;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity:0.3;
-}
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        opacity: 0.3;
+      }
 
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  height:68px;padding:0 5%;
-  display:flex;align-items:center;justify-content:space-between;
-  background:rgba(250,247,242,0.9);
-  backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid rgba(45,107,48,0.12);
-  transition:box-shadow 0.3s;
-}
-nav.scrolled{box-shadow:0 4px 24px rgba(15,32,16,0.08);}
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 500;
+        height: 68px;
+        padding: 0 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: rgba(250, 247, 242, 0.9);
+        backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(45, 107, 48, 0.12);
+        transition: box-shadow 0.3s;
+      }
+      nav.scrolled {
+        box-shadow: 0 4px 24px rgba(15, 32, 16, 0.08);
+      }
 
-.logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.55rem;font-weight:700;color:var(--g700);
-  text-decoration:none;letter-spacing:-0.02em;
-  display:flex;align-items:center;gap:0.4rem;
-}
-.logo-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--o400);margin-top:2px;
-  animation:breathe 3s ease-in-out infinite;
-}
-@keyframes breathe{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.6;}}
+      .logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: var(--g700);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+      .logo-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--o400);
+        margin-top: 2px;
+        animation: breathe 3s ease-in-out infinite;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.4);
+          opacity: 0.6;
+        }
+      }
 
-.nav-links{display:flex;gap:2.5rem;}
-.nav-links a{
-  font-size:0.88rem;font-weight:400;color:var(--muted);
-  text-decoration:none;transition:color 0.2s;position:relative;
-}
-.nav-links a::after{
-  content:'';position:absolute;bottom:-2px;left:0;
-  width:0;height:1.5px;background:var(--g500);transition:width 0.25s;
-}
-.nav-links a:hover{color:var(--g700);}
-.nav-links a:hover::after{width:100%;}
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+      }
+      .nav-links a {
+        font-size: 0.88rem;
+        font-weight: 400;
+        color: var(--muted);
+        text-decoration: none;
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1.5px;
+        background: var(--g500);
+        transition: width 0.25s;
+      }
+      .nav-links a:hover {
+        color: var(--g700);
+      }
+      .nav-links a:hover::after {
+        width: 100%;
+      }
 
-.nav-actions{display:flex;gap:0.75rem;align-items:center;}
-.btn-ghost{
-  font-size:0.88rem;font-weight:500;color:var(--g700);
-  padding:0.5rem 1.2rem;border-radius:var(--r-sm);
-  border:1.5px solid rgba(45,107,48,0.25);text-decoration:none;transition:all 0.2s;
-}
-.btn-ghost:hover{background:rgba(45,107,48,0.06);}
-.btn-fill{
-  font-size:0.88rem;font-weight:600;color:#fff;
-  padding:0.55rem 1.4rem;border-radius:var(--r-sm);
-  background:var(--g700);text-decoration:none;
-  box-shadow:0 2px 12px rgba(45,107,48,0.25);transition:all 0.2s;
-}
-.btn-fill:hover{background:var(--g600);transform:translateY(-1px);box-shadow:0 6px 20px rgba(45,107,48,0.3);}
+      .nav-actions {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .btn-ghost {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: var(--g700);
+        padding: 0.5rem 1.2rem;
+        border-radius: var(--r-sm);
+        border: 1.5px solid rgba(45, 107, 48, 0.25);
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .btn-ghost:hover {
+        background: rgba(45, 107, 48, 0.06);
+      }
+      .btn-fill {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #fff;
+        padding: 0.55rem 1.4rem;
+        border-radius: var(--r-sm);
+        background: var(--g700);
+        text-decoration: none;
+        box-shadow: 0 2px 12px rgba(45, 107, 48, 0.25);
+        transition: all 0.2s;
+      }
+      .btn-fill:hover {
+        background: var(--g600);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px rgba(45, 107, 48, 0.3);
+      }
 
-/* ── HERO ── */
-.hero{
-  min-height:100vh;position:relative;
-  display:flex;align-items:center;overflow:hidden;
-}
+      /* ── HERO ── */
+      .hero {
+        min-height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
 
-/* Imagem via tag <img> posicionada absolutamente — sem CSS background-url */
-.hero-img-wrap{
-  position:absolute;inset:0;z-index:0;overflow:hidden;
-}
-.hero-img-wrap img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  display:block;
-}
-.hero-img-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(
-    135deg,
-    rgba(15,32,16,0.88) 0%,
-    rgba(26,58,28,0.75) 45%,
-    rgba(26,58,28,0.50) 70%,
-    rgba(15,32,16,0.70) 100%
-  );
-}
+      /* Imagem via tag <img> posicionada absolutamente — sem CSS background-url */
+      .hero-img-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .hero-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+      .hero-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 32, 16, 0.88) 0%,
+          rgba(26, 58, 28, 0.75) 45%,
+          rgba(26, 58, 28, 0.5) 70%,
+          rgba(15, 32, 16, 0.7) 100%
+        );
+      }
 
-.hero::after{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:200px;z-index:1;
-  background:linear-gradient(to top,var(--cream),transparent);
-}
+      .hero::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 200px;
+        z-index: 1;
+        background: linear-gradient(to top, var(--cream), transparent);
+      }
 
-.hero-content{
-  position:relative;z-index:2;
-  padding:0 5%;padding-top:90px;max-width:780px;
-}
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 5%;
+        padding-top: 90px;
+        max-width: 780px;
+      }
 
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  background:rgba(232,150,42,0.15);
-  border:1px solid rgba(232,150,42,0.4);
-  color:var(--o300);font-size:0.78rem;font-weight:500;
-  letter-spacing:0.08em;text-transform:uppercase;
-  padding:0.4rem 1rem;border-radius:100px;margin-bottom:2rem;
-  animation:fadeUp 0.6s ease 0.1s both;
-}
-.eyebrow-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--o300);flex-shrink:0;
-  animation:breathe 2s ease-in-out infinite;
-}
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: rgba(232, 150, 42, 0.15);
+        border: 1px solid rgba(232, 150, 42, 0.4);
+        color: var(--o300);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        margin-bottom: 2rem;
+        animation: fadeUp 0.6s ease 0.1s both;
+      }
+      .eyebrow-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--o300);
+        flex-shrink: 0;
+        animation: breathe 2s ease-in-out infinite;
+      }
 
-h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(3rem,6.5vw,5.8rem);
-  font-weight:700;line-height:1.0;letter-spacing:-0.03em;color:#fff;
-  margin-bottom:1.6rem;
-  animation:fadeUp 0.6s ease 0.2s both;
-}
-h1 em{font-style:italic;color:var(--g300);}
-h1 .gold{color:var(--o300);}
+      h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3rem, 6.5vw, 5.8rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        color: #fff;
+        margin-bottom: 1.6rem;
+        animation: fadeUp 0.6s ease 0.2s both;
+      }
+      h1 em {
+        font-style: italic;
+        color: var(--g300);
+      }
+      h1 .gold {
+        color: var(--o300);
+      }
 
-.hero-sub{
-  font-size:1.1rem;font-weight:300;
-  color:rgba(255,255,255,0.72);line-height:1.75;
-  max-width:520px;margin-bottom:2.5rem;
-  animation:fadeUp 0.6s ease 0.3s both;
-}
+      .hero-sub {
+        font-size: 1.1rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.72);
+        line-height: 1.75;
+        max-width: 520px;
+        margin-bottom: 2.5rem;
+        animation: fadeUp 0.6s ease 0.3s both;
+      }
 
-.hero-ctas{
-  display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3.5rem;
-  animation:fadeUp 0.6s ease 0.4s both;
-}
+      .hero-ctas {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 3.5rem;
+        animation: fadeUp 0.6s ease 0.4s both;
+      }
 
-.btn-hero-primary{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  background:var(--o400);color:var(--ink);
-  font-size:0.95rem;font-weight:600;
-  padding:0.9rem 2rem;border-radius:var(--r-md);
-  text-decoration:none;
-  box-shadow:0 4px 24px rgba(232,150,42,0.4);transition:all 0.25s;
-}
-.btn-hero-primary:hover{background:var(--o300);transform:translateY(-2px);box-shadow:0 8px 32px rgba(232,150,42,0.5);}
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--o400);
+        color: var(--ink);
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 0.9rem 2rem;
+        border-radius: var(--r-md);
+        text-decoration: none;
+        box-shadow: 0 4px 24px rgba(232, 150, 42, 0.4);
+        transition: all 0.25s;
+      }
+      .btn-hero-primary:hover {
+        background: var(--o300);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(232, 150, 42, 0.5);
+      }
 
-.btn-hero-ghost{
-  display:inline-flex;align-items:center;gap:0.6rem;
-  background:rgba(255,255,255,0.1);
-  border:1.5px solid rgba(255,255,255,0.25);
-  color:#fff;font-size:0.95rem;font-weight:400;
-  padding:0.9rem 2rem;border-radius:var(--r-md);
-  text-decoration:none;transition:all 0.25s;backdrop-filter:blur(8px);
-}
-.btn-hero-ghost:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px);}
+      .btn-hero-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1.5px solid rgba(255, 255, 255, 0.25);
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 400;
+        padding: 0.9rem 2rem;
+        border-radius: var(--r-md);
+        text-decoration: none;
+        transition: all 0.25s;
+        backdrop-filter: blur(8px);
+      }
+      .btn-hero-ghost:hover {
+        background: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+      }
 
-.hero-proof{
-  display:flex;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:var(--r-md);width:fit-content;overflow:hidden;
-  backdrop-filter:blur(12px);
-  animation:fadeUp 0.6s ease 0.5s both;
-}
-.proof-item{
-  padding:1rem 1.6rem;display:flex;flex-direction:column;
-  border-right:1px solid rgba(255,255,255,0.1);
-}
-.proof-item:last-child{border:none;}
-.proof-num{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:700;color:#fff;line-height:1;
-}
-.proof-label{font-size:0.7rem;color:rgba(255,255,255,0.5);margin-top:3px;}
+      .hero-proof {
+        display: flex;
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: var(--r-md);
+        width: fit-content;
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+        animation: fadeUp 0.6s ease 0.5s both;
+      }
+      .proof-item {
+        padding: 1rem 1.6rem;
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .proof-item:last-child {
+        border: none;
+      }
+      .proof-num {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1;
+      }
+      .proof-label {
+        font-size: 0.7rem;
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 3px;
+      }
 
-/* ── MARQUEE ── */
-.strip{
-  background:var(--g700);color:var(--g200);
-  padding:0.85rem 0;overflow:hidden;white-space:nowrap;
-  font-size:0.82rem;font-weight:400;letter-spacing:0.04em;
-}
-.strip-inner{display:inline-flex;animation:marquee 35s linear infinite;}
-@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
-.strip-item{display:inline-flex;align-items:center;gap:1.5rem;padding:0 2rem;}
-.strip-item i{color:var(--o400);font-size:0.7rem;}
+      /* ── MARQUEE ── */
+      .strip {
+        background: var(--g700);
+        color: var(--g200);
+        padding: 0.85rem 0;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 0.82rem;
+        font-weight: 400;
+        letter-spacing: 0.04em;
+      }
+      .strip-inner {
+        display: inline-flex;
+        animation: marquee 35s linear infinite;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      .strip-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0 2rem;
+      }
+      .strip-item i {
+        color: var(--o400);
+        font-size: 0.7rem;
+      }
 
-/* ── SEÇÃO GENÉRICA ── */
-.eyebrow-sm{
-  font-size:0.74rem;font-weight:600;letter-spacing:0.12em;
-  text-transform:uppercase;color:var(--g500);
-  margin-bottom:0.8rem;display:block;
-}
-h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2rem,4vw,3.2rem);font-weight:700;
-  line-height:1.08;letter-spacing:-0.03em;color:var(--ink);
-}
-h2 em{font-style:italic;color:var(--g600);}
-.section-lead{
-  font-size:1rem;color:var(--muted);line-height:1.75;
-  max-width:520px;margin-top:0.9rem;
-}
+      /* ── SEÇÃO GENÉRICA ── */
+      .eyebrow-sm {
+        font-size: 0.74rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--g500);
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+      h2 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 700;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+      }
+      h2 em {
+        font-style: italic;
+        color: var(--g600);
+      }
+      .section-lead {
+        font-size: 1rem;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 520px;
+        margin-top: 0.9rem;
+      }
 
-/* ── AUDIENCES ── */
-.audiences{padding:8rem 5%;background:var(--cream);}
-.section-header{margin-bottom:3.5rem;}
-.audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+      /* ── AUDIENCES ── */
+      .audiences {
+        padding: 8rem 5%;
+        background: var(--cream);
+      }
+      .section-header {
+        margin-bottom: 3.5rem;
+      }
+      .audience-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
 
-.aud-card{
-  border-radius:var(--r-xl);overflow:hidden;position:relative;
-  min-height:580px;display:flex;flex-direction:column;justify-content:flex-end;
-  transition:transform 0.4s cubic-bezier(.25,.46,.45,.94),box-shadow 0.4s;
-}
-.aud-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(15,32,16,0.2);}
+      .aud-card {
+        border-radius: var(--r-xl);
+        overflow: hidden;
+        position: relative;
+        min-height: 580px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        transition:
+          transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          box-shadow 0.4s;
+      }
+      .aud-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 24px 60px rgba(15, 32, 16, 0.2);
+      }
 
-/* Imagens via <img> tag */
-.aud-img-wrap{
-  position:absolute;inset:0;z-index:0;
-}
-.aud-img-wrap img{
-  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
-}
-.aud-img-wrap::after{
-  content:'';position:absolute;inset:0;
-}
-.aud-card.agricultor .aud-img-wrap::after{
-  background:linear-gradient(to top,rgba(10,28,11,0.96) 0%,rgba(10,28,11,0.55) 50%,rgba(10,28,11,0.15) 100%);
-}
-.aud-card.tecnico .aud-img-wrap::after{
-  background:linear-gradient(to top,rgba(20,48,22,0.96) 0%,rgba(20,48,22,0.50) 50%,rgba(20,48,22,0.12) 100%);
-}
+      /* Imagens via <img> tag */
+      .aud-img-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .aud-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+      .aud-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+      }
+      .aud-card.agricultor .aud-img-wrap::after {
+        background: linear-gradient(
+          to top,
+          rgba(10, 28, 11, 0.96) 0%,
+          rgba(10, 28, 11, 0.55) 50%,
+          rgba(10, 28, 11, 0.15) 100%
+        );
+      }
+      .aud-card.tecnico .aud-img-wrap::after {
+        background: linear-gradient(
+          to top,
+          rgba(20, 48, 22, 0.96) 0%,
+          rgba(20, 48, 22, 0.5) 50%,
+          rgba(20, 48, 22, 0.12) 100%
+        );
+      }
 
-.aud-badge{
-  position:absolute;top:1.5rem;left:1.5rem;z-index:2;
-  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
-  backdrop-filter:blur(10px);color:#fff;
-  font-size:0.72rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
-  padding:0.4rem 1rem;border-radius:100px;
-  display:flex;align-items:center;gap:0.5rem;
-}
-.aud-card.agricultor .aud-badge{border-color:rgba(130,201,135,0.4);color:var(--g200);}
-.aud-card.tecnico .aud-badge{border-color:rgba(232,150,42,0.4);color:var(--o300);}
+      .aud-badge {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .aud-card.agricultor .aud-badge {
+        border-color: rgba(130, 201, 135, 0.4);
+        color: var(--g200);
+      }
+      .aud-card.tecnico .aud-badge {
+        border-color: rgba(232, 150, 42, 0.4);
+        color: var(--o300);
+      }
 
-.aud-body{padding:2rem 2.2rem 2.4rem;position:relative;z-index:1;}
-.aud-icon-box{
-  width:48px;height:48px;border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:1rem;font-size:1.2rem;
-}
-.aud-card.agricultor .aud-icon-box{background:rgba(130,201,135,0.15);color:var(--g300);border:1px solid rgba(130,201,135,0.25);}
-.aud-card.tecnico .aud-icon-box{background:rgba(232,150,42,0.15);color:var(--o300);border:1px solid rgba(232,150,42,0.25);}
+      .aud-body {
+        padding: 2rem 2.2rem 2.4rem;
+        position: relative;
+        z-index: 1;
+      }
+      .aud-icon-box {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+      }
+      .aud-card.agricultor .aud-icon-box {
+        background: rgba(130, 201, 135, 0.15);
+        color: var(--g300);
+        border: 1px solid rgba(130, 201, 135, 0.25);
+      }
+      .aud-card.tecnico .aud-icon-box {
+        background: rgba(232, 150, 42, 0.15);
+        color: var(--o300);
+        border: 1px solid rgba(232, 150, 42, 0.25);
+      }
 
-.aud-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.85rem;font-weight:700;color:#fff;
-  line-height:1.1;letter-spacing:-0.02em;margin-bottom:0.8rem;
-}
-.aud-desc{font-size:0.87rem;color:rgba(255,255,255,0.58);line-height:1.7;margin-bottom:1.4rem;}
+      .aud-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.85rem;
+        font-weight: 700;
+        color: #fff;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.8rem;
+      }
+      .aud-desc {
+        font-size: 0.87rem;
+        color: rgba(255, 255, 255, 0.58);
+        line-height: 1.7;
+        margin-bottom: 1.4rem;
+      }
 
-.feature-pills{display:flex;flex-direction:column;gap:0.55rem;}
-.feat-pill{display:flex;align-items:center;gap:0.7rem;font-size:0.82rem;color:rgba(255,255,255,0.82);}
-.feat-check{
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:0.65rem;
-}
-.aud-card.agricultor .feat-check{background:rgba(130,201,135,0.2);color:var(--g300);}
-.aud-card.tecnico .feat-check{background:rgba(232,150,42,0.2);color:var(--o300);}
+      .feature-pills {
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+      }
+      .feat-pill {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.82);
+      }
+      .feat-check {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.65rem;
+      }
+      .aud-card.agricultor .feat-check {
+        background: rgba(130, 201, 135, 0.2);
+        color: var(--g300);
+      }
+      .aud-card.tecnico .feat-check {
+        background: rgba(232, 150, 42, 0.2);
+        color: var(--o300);
+      }
 
-.aud-cta{
-  display:inline-flex;align-items:center;gap:0.5rem;margin-top:1.6rem;
-  font-size:0.85rem;font-weight:500;text-decoration:none;
-  padding:0.7rem 1.4rem;border-radius:var(--r-sm);transition:all 0.2s;
-}
-.aud-card.agricultor .aud-cta{background:var(--g300);color:var(--g900);}
-.aud-card.agricultor .aud-cta:hover{background:#fff;}
-.aud-card.tecnico .aud-cta{background:var(--o400);color:var(--ink);}
-.aud-card.tecnico .aud-cta:hover{background:var(--o300);}
+      .aud-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1.6rem;
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 0.7rem 1.4rem;
+        border-radius: var(--r-sm);
+        transition: all 0.2s;
+      }
+      .aud-card.agricultor .aud-cta {
+        background: var(--g300);
+        color: var(--g900);
+      }
+      .aud-card.agricultor .aud-cta:hover {
+        background: #fff;
+      }
+      .aud-card.tecnico .aud-cta {
+        background: var(--o400);
+        color: var(--ink);
+      }
+      .aud-card.tecnico .aud-cta:hover {
+        background: var(--o300);
+      }
 
-/* ── HOW IT WORKS ── */
-.how{
-  padding:8rem 5%;background:var(--g900);position:relative;overflow:hidden;
-}
-.how::before{
-  content:'';position:absolute;top:-40%;left:50%;transform:translateX(-50%);
-  width:800px;height:700px;border-radius:50%;
-  background:radial-gradient(ellipse,rgba(61,140,65,0.1) 0%,transparent 65%);
-  pointer-events:none;
-}
-.how .eyebrow-sm{color:var(--g300);}
-.how h2{color:#fff;}
-.how h2 em{color:var(--g300);}
-.how .section-lead{color:rgba(255,255,255,0.45);}
+      /* ── HOW IT WORKS ── */
+      .how {
+        padding: 8rem 5%;
+        background: var(--g900);
+        position: relative;
+        overflow: hidden;
+      }
+      .how::before {
+        content: "";
+        position: absolute;
+        top: -40%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 800px;
+        height: 700px;
+        border-radius: 50%;
+        background: radial-gradient(ellipse, rgba(61, 140, 65, 0.1) 0%, transparent 65%);
+        pointer-events: none;
+      }
+      .how .eyebrow-sm {
+        color: var(--g300);
+      }
+      .how h2 {
+        color: #fff;
+      }
+      .how h2 em {
+        color: var(--g300);
+      }
+      .how .section-lead {
+        color: rgba(255, 255, 255, 0.45);
+      }
 
-.steps-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:2rem;position:relative;margin-top:4rem;
-}
-.steps-grid::before{
-  content:'';position:absolute;top:39px;left:10%;right:10%;height:1px;
-  background:linear-gradient(90deg,var(--g600),var(--o500),var(--g600));
-  opacity:0.35;z-index:0;
-}
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        position: relative;
+        margin-top: 4rem;
+      }
+      .steps-grid::before {
+        content: "";
+        position: absolute;
+        top: 39px;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(90deg, var(--g600), var(--o500), var(--g600));
+        opacity: 0.35;
+        z-index: 0;
+      }
 
-.step{text-align:center;position:relative;z-index:1;}
-.step-orb{
-  width:78px;height:78px;border-radius:50%;
-  margin:0 auto 1.4rem;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--g800);border:1.5px solid var(--g600);
-  position:relative;transition:all 0.3s;
-  font-size:1.4rem;color:var(--g300);
-}
-.step-orb::before{
-  content:'';position:absolute;inset:-5px;border-radius:50%;
-  border:1px solid rgba(61,140,65,0.18);
-}
-.step:hover .step-orb{border-color:var(--o400);color:var(--o300);box-shadow:0 0 28px rgba(232,150,42,0.2);}
+      .step {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .step-orb {
+        width: 78px;
+        height: 78px;
+        border-radius: 50%;
+        margin: 0 auto 1.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--g800);
+        border: 1.5px solid var(--g600);
+        position: relative;
+        transition: all 0.3s;
+        font-size: 1.4rem;
+        color: var(--g300);
+      }
+      .step-orb::before {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border-radius: 50%;
+        border: 1px solid rgba(61, 140, 65, 0.18);
+      }
+      .step:hover .step-orb {
+        border-color: var(--o400);
+        color: var(--o300);
+        box-shadow: 0 0 28px rgba(232, 150, 42, 0.2);
+      }
 
-.step-title{font-size:0.92rem;font-weight:600;color:#fff;margin-bottom:0.4rem;}
-.step-desc{font-size:0.78rem;color:rgba(255,255,255,0.42);line-height:1.65;}
+      .step-title {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.4rem;
+      }
+      .step-desc {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.42);
+        line-height: 1.65;
+      }
 
-/* ── BLOCO SERRA ── */
-.serra-block{
-  position:relative;min-height:580px;
-  display:flex;align-items:center;overflow:hidden;
-}
-.serra-img-wrap{position:absolute;inset:0;z-index:0;}
-.serra-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-.serra-img-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(105deg,rgba(15,32,16,0.93) 0%,rgba(15,32,16,0.65) 55%,rgba(15,32,16,0.35) 100%);
-}
+      /* ── BLOCO SERRA ── */
+      .serra-block {
+        position: relative;
+        min-height: 580px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+      .serra-img-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .serra-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+      .serra-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          105deg,
+          rgba(15, 32, 16, 0.93) 0%,
+          rgba(15, 32, 16, 0.65) 55%,
+          rgba(15, 32, 16, 0.35) 100%
+        );
+      }
 
-.serra-content{position:relative;z-index:2;padding:4rem 5%;max-width:660px;}
-.number-display{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:2.5rem;}
-.num-val{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.8rem;font-weight:700;color:var(--g300);line-height:1;
-}
-.num-label{font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:6px;line-height:1.45;}
+      .serra-content {
+        position: relative;
+        z-index: 2;
+        padding: 4rem 5%;
+        max-width: 660px;
+      }
+      .number-display {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+      }
+      .num-val {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: var(--g300);
+        line-height: 1;
+      }
+      .num-label {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.45);
+        margin-top: 6px;
+        line-height: 1.45;
+      }
 
-/* ── APP PREVIEW (BENTO) ── */
-.app-preview{padding:8rem 5%;background:var(--parchment);}
+      /* ── APP PREVIEW (BENTO) ── */
+      .app-preview {
+        padding: 8rem 5%;
+        background: var(--parchment);
+      }
 
-.bento{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  gap:1.2rem;margin-top:3.5rem;
-}
-.bc{/* bento card base */
-  background:var(--cream);
-  border:1px solid rgba(45,107,48,0.1);
-  border-radius:var(--r-lg);overflow:hidden;
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.bc:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(15,32,16,0.09);}
-.s7{grid-column:span 7;}
-.s5{grid-column:span 5;}
-.s4{grid-column:span 4;}
-.s8{grid-column:span 8;}
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 1.2rem;
+        margin-top: 3.5rem;
+      }
+      .bc {
+        /* bento card base */
+        background: var(--cream);
+        border: 1px solid rgba(45, 107, 48, 0.1);
+        border-radius: var(--r-lg);
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+      .bc:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 48px rgba(15, 32, 16, 0.09);
+      }
+      .s7 {
+        grid-column: span 7;
+      }
+      .s5 {
+        grid-column: span 5;
+      }
+      .s4 {
+        grid-column: span 4;
+      }
+      .s8 {
+        grid-column: span 8;
+      }
 
-/* Bento 1 — stats */
-.b-stats{background:var(--g800);padding:2rem 2rem 0;}
-.b-lbl{
-  font-size:0.7rem;font-weight:500;letter-spacing:0.08em;
-  text-transform:uppercase;color:var(--g300);margin-bottom:0.8rem;
-  display:flex;align-items:center;gap:0.5rem;
-}
-.b-lbl i{font-size:0.75rem;}
-.b-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.2rem;font-weight:600;color:#fff;margin-bottom:0.3rem;
-}
-.metrics-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.4rem;}
-.met{background:rgba(255,255,255,0.06);border-radius:var(--r-sm);padding:0.9rem 1rem;}
-.met-val{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.9rem;font-weight:700;color:var(--g300);line-height:1;
-}
-.met-lbl{font-size:0.68rem;color:rgba(255,255,255,0.38);margin-top:3px;}
-.chart-bars{
-  display:flex;align-items:flex-end;gap:5px;
-  height:72px;padding-top:1.2rem;
-}
-.bar{
-  flex:1;border-radius:3px 3px 0 0;
-  background:linear-gradient(to top,var(--g600),var(--g400));
-  opacity:0.65;transition:opacity 0.2s;
-}
-.bar:hover{opacity:1;}
-.bar.hi{background:linear-gradient(to top,var(--o600),var(--o400));opacity:1;}
+      /* Bento 1 — stats */
+      .b-stats {
+        background: var(--g800);
+        padding: 2rem 2rem 0;
+      }
+      .b-lbl {
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--g300);
+        margin-bottom: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .b-lbl i {
+        font-size: 0.75rem;
+      }
+      .b-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 0.3rem;
+      }
+      .metrics-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-top: 1.4rem;
+      }
+      .met {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: var(--r-sm);
+        padding: 0.9rem 1rem;
+      }
+      .met-val {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: var(--g300);
+        line-height: 1;
+      }
+      .met-lbl {
+        font-size: 0.68rem;
+        color: rgba(255, 255, 255, 0.38);
+        margin-top: 3px;
+      }
+      .chart-bars {
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+        height: 72px;
+        padding-top: 1.2rem;
+      }
+      .bar {
+        flex: 1;
+        border-radius: 3px 3px 0 0;
+        background: linear-gradient(to top, var(--g600), var(--g400));
+        opacity: 0.65;
+        transition: opacity 0.2s;
+      }
+      .bar:hover {
+        opacity: 1;
+      }
+      .bar.hi {
+        background: linear-gradient(to top, var(--o600), var(--o400));
+        opacity: 1;
+      }
 
-/* Bento 2 — lotes */
-.b-lotes{padding:1.6rem;}
-.lote-row{
-  display:flex;align-items:center;gap:0.85rem;
-  padding:0.78rem 0;border-bottom:1px solid rgba(45,107,48,0.08);
-}
-.lote-row:last-child{border:none;}
-.l-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
-.l-dot.g{background:var(--g400);}
-.l-dot.a{background:var(--o400);}
-.l-dot.b{background:#5B8ED6;}
-.l-name{font-size:0.83rem;font-weight:500;color:var(--ink);flex:1;}
-.l-area{font-size:0.72rem;color:var(--muted);}
-.l-tag{
-  font-size:0.67rem;font-weight:500;
-  padding:3px 9px;border-radius:100px;
-}
-.t-g{background:rgba(90,173,95,0.12);color:var(--g600);}
-.t-a{background:rgba(232,150,42,0.12);color:var(--o600);}
+      /* Bento 2 — lotes */
+      .b-lotes {
+        padding: 1.6rem;
+      }
+      .lote-row {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.78rem 0;
+        border-bottom: 1px solid rgba(45, 107, 48, 0.08);
+      }
+      .lote-row:last-child {
+        border: none;
+      }
+      .l-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .l-dot.g {
+        background: var(--g400);
+      }
+      .l-dot.a {
+        background: var(--o400);
+      }
+      .l-dot.b {
+        background: #5b8ed6;
+      }
+      .l-name {
+        font-size: 0.83rem;
+        font-weight: 500;
+        color: var(--ink);
+        flex: 1;
+      }
+      .l-area {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .l-tag {
+        font-size: 0.67rem;
+        font-weight: 500;
+        padding: 3px 9px;
+        border-radius: 100px;
+      }
+      .t-g {
+        background: rgba(90, 173, 95, 0.12);
+        color: var(--g600);
+      }
+      .t-a {
+        background: rgba(232, 150, 42, 0.12);
+        color: var(--o600);
+      }
 
-/* Bento 3 — QR */
-.b-qr{
-  background:var(--g700);padding:1.8rem;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-}
-.qr-svg-wrap{margin-bottom:1rem;}
-.b-qr p{font-size:0.75rem;color:rgba(255,255,255,0.65);line-height:1.55;}
-.b-qr strong{color:var(--g200);font-weight:500;}
+      /* Bento 3 — QR */
+      .b-qr {
+        background: var(--g700);
+        padding: 1.8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .qr-svg-wrap {
+        margin-bottom: 1rem;
+      }
+      .b-qr p {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.65);
+        line-height: 1.55;
+      }
+      .b-qr strong {
+        color: var(--g200);
+        font-weight: 500;
+      }
 
-/* Bento 4 — mapa */
-.b-map{background:var(--g900);padding:1.6rem;}
-.map-canvas{
-  margin-top:1rem;
-  background:rgba(61,140,65,0.05);
-  border:1px solid rgba(61,140,65,0.15);
-  border-radius:var(--r-sm);
-  min-height:150px;position:relative;overflow:hidden;
-}
-.t-line{
-  position:absolute;width:130%;height:2px;
-  background:linear-gradient(90deg,transparent,rgba(61,140,65,0.25),transparent);
-  border-radius:50%;left:-15%;
-}
-.pin{
-  position:absolute;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:2px;z-index:2;
-}
-.pin-dot{
-  width:10px;height:10px;border-radius:50%;
-  box-shadow:0 0 0 4px rgba(232,150,42,0.25);
-  background:var(--o400);
-  animation:pinP 2s ease-in-out infinite;
-}
-@keyframes pinP{0%,100%{box-shadow:0 0 0 4px rgba(232,150,42,0.25);}50%{box-shadow:0 0 0 10px rgba(232,150,42,0.04);}}
-.pin-dot.gd{background:var(--g400);box-shadow:0 0 0 4px rgba(90,173,95,0.2);animation:pinPG 2.4s ease-in-out infinite;}
-@keyframes pinPG{0%,100%{box-shadow:0 0 0 4px rgba(90,173,95,0.2);}50%{box-shadow:0 0 0 10px rgba(90,173,95,0.04);}}
-.pin-lbl{
-  font-size:0.58rem;font-weight:500;
-  color:rgba(255,255,255,0.65);
-  background:rgba(0,0,0,0.45);padding:2px 6px;border-radius:4px;white-space:nowrap;
-}
+      /* Bento 4 — mapa */
+      .b-map {
+        background: var(--g900);
+        padding: 1.6rem;
+      }
+      .map-canvas {
+        margin-top: 1rem;
+        background: rgba(61, 140, 65, 0.05);
+        border: 1px solid rgba(61, 140, 65, 0.15);
+        border-radius: var(--r-sm);
+        min-height: 150px;
+        position: relative;
+        overflow: hidden;
+      }
+      .t-line {
+        position: absolute;
+        width: 130%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(61, 140, 65, 0.25), transparent);
+        border-radius: 50%;
+        left: -15%;
+      }
+      .pin {
+        position: absolute;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        z-index: 2;
+      }
+      .pin-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(232, 150, 42, 0.25);
+        background: var(--o400);
+        animation: pinP 2s ease-in-out infinite;
+      }
+      @keyframes pinP {
+        0%,
+        100% {
+          box-shadow: 0 0 0 4px rgba(232, 150, 42, 0.25);
+        }
+        50% {
+          box-shadow: 0 0 0 10px rgba(232, 150, 42, 0.04);
+        }
+      }
+      .pin-dot.gd {
+        background: var(--g400);
+        box-shadow: 0 0 0 4px rgba(90, 173, 95, 0.2);
+        animation: pinPG 2.4s ease-in-out infinite;
+      }
+      @keyframes pinPG {
+        0%,
+        100% {
+          box-shadow: 0 0 0 4px rgba(90, 173, 95, 0.2);
+        }
+        50% {
+          box-shadow: 0 0 0 10px rgba(90, 173, 95, 0.04);
+        }
+      }
+      .pin-lbl {
+        font-size: 0.58rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.65);
+        background: rgba(0, 0, 0, 0.45);
+        padding: 2px 6px;
+        border-radius: 4px;
+        white-space: nowrap;
+      }
 
-/* Bento 5 — score */
-.b-score{padding:1.6rem;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-.score-ring{width:90px;height:90px;position:relative;margin-bottom:0.8rem;}
-.score-ring svg{width:100%;height:100%;transform:rotate(-90deg);}
-.score-ring .tr{fill:none;stroke:rgba(45,107,48,0.1);stroke-width:8;}
-.score-ring .fi{
-  fill:none;stroke:var(--g500);stroke-width:8;stroke-linecap:round;
-  stroke-dasharray:220;stroke-dashoffset:220;
-  transition:stroke-dashoffset 1.2s cubic-bezier(.22,.61,.36,1);
-}
-.score-center{
-  position:absolute;inset:0;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-}
-.score-n{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.5rem;font-weight:700;color:var(--g700);line-height:1;
-}
-.score-s{font-size:0.58rem;color:var(--muted);}
-.b-score p{font-size:0.76rem;color:var(--muted);text-align:center;line-height:1.5;}
-.b-score strong{color:var(--g600);font-weight:500;}
+      /* Bento 5 — score */
+      .b-score {
+        padding: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .score-ring {
+        width: 90px;
+        height: 90px;
+        position: relative;
+        margin-bottom: 0.8rem;
+      }
+      .score-ring svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+      .score-ring .tr {
+        fill: none;
+        stroke: rgba(45, 107, 48, 0.1);
+        stroke-width: 8;
+      }
+      .score-ring .fi {
+        fill: none;
+        stroke: var(--g500);
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke-dasharray: 220;
+        stroke-dashoffset: 220;
+        transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .score-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .score-n {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--g700);
+        line-height: 1;
+      }
+      .score-s {
+        font-size: 0.58rem;
+        color: var(--muted);
+      }
+      .b-score p {
+        font-size: 0.76rem;
+        color: var(--muted);
+        text-align: center;
+        line-height: 1.5;
+      }
+      .b-score strong {
+        color: var(--g600);
+        font-weight: 500;
+      }
 
-/* ── TÉCNICO BLOCK ── */
-.tecnico-block{display:grid;grid-template-columns:1fr 1fr;min-height:580px;}
-.tec-photo{position:relative;overflow:hidden;min-height:400px;}
-.tec-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
-.tec-photo::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to right,rgba(15,32,16,0.25),transparent);
-}
+      /* ── TÉCNICO BLOCK ── */
+      .tecnico-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 580px;
+      }
+      .tec-photo {
+        position: relative;
+        overflow: hidden;
+        min-height: 400px;
+      }
+      .tec-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+      .tec-photo::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to right, rgba(15, 32, 16, 0.25), transparent);
+      }
 
-.tec-content{
-  background:var(--g900);padding:5rem 4rem;
-  display:flex;flex-direction:column;justify-content:center;
-}
-.tec-content .eyebrow-sm{color:var(--g300);}
-.tec-content h2{color:#fff;font-size:clamp(1.8rem,3vw,2.6rem);}
-.tec-content h2 em{color:var(--o300);}
-.tec-content .section-lead{color:rgba(255,255,255,0.5);max-width:400px;margin-bottom:2.5rem;}
+      .tec-content {
+        background: var(--g900);
+        padding: 5rem 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .tec-content .eyebrow-sm {
+        color: var(--g300);
+      }
+      .tec-content h2 {
+        color: #fff;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+      }
+      .tec-content h2 em {
+        color: var(--o300);
+      }
+      .tec-content .section-lead {
+        color: rgba(255, 255, 255, 0.5);
+        max-width: 400px;
+        margin-bottom: 2.5rem;
+      }
 
-.feat-list{display:flex;flex-direction:column;gap:1.2rem;margin-bottom:2.5rem;}
-.feat-item{display:flex;gap:1rem;align-items:flex-start;}
-.feat-ibox{
-  width:42px;height:42px;flex-shrink:0;border-radius:var(--r-sm);
-  background:rgba(61,140,65,0.12);
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid rgba(61,140,65,0.2);font-size:1rem;color:var(--g300);
-}
-.feat-text h4{font-size:0.88rem;font-weight:500;color:#fff;margin-bottom:3px;}
-.feat-text p{font-size:0.78rem;color:rgba(255,255,255,0.42);line-height:1.55;}
+      .feat-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        margin-bottom: 2.5rem;
+      }
+      .feat-item {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      .feat-ibox {
+        width: 42px;
+        height: 42px;
+        flex-shrink: 0;
+        border-radius: var(--r-sm);
+        background: rgba(61, 140, 65, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(61, 140, 65, 0.2);
+        font-size: 1rem;
+        color: var(--g300);
+      }
+      .feat-text h4 {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: #fff;
+        margin-bottom: 3px;
+      }
+      .feat-text p {
+        font-size: 0.78rem;
+        color: rgba(255, 255, 255, 0.42);
+        line-height: 1.55;
+      }
 
-/* ── PLANOS ── */
-.plans{padding:8rem 5%;background:var(--cream);}
-.plans-header{text-align:center;margin-bottom:4rem;}
-.plans-header .section-lead{margin:0.9rem auto 0;}
+      /* ── PLANOS ── */
+      .plans {
+        padding: 8rem 5%;
+        background: var(--cream);
+      }
+      .plans-header {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+      .plans-header .section-lead {
+        margin: 0.9rem auto 0;
+      }
 
-.plans-row{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:1.5rem;max-width:980px;margin:0 auto;
-}
-.plan-card{
-  border-radius:var(--r-lg);border:1px solid rgba(45,107,48,0.12);
-  padding:2.2rem;position:relative;overflow:hidden;
-  transition:transform 0.3s,box-shadow 0.3s;
-  background:var(--cream);
-}
-.plan-card:hover{transform:translateY(-4px);box-shadow:0 20px 48px rgba(15,32,16,0.09);}
-.plan-card.mid{background:var(--g800);border-color:var(--g600);}
+      .plans-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 980px;
+        margin: 0 auto;
+      }
+      .plan-card {
+        border-radius: var(--r-lg);
+        border: 1px solid rgba(45, 107, 48, 0.12);
+        padding: 2.2rem;
+        position: relative;
+        overflow: hidden;
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        background: var(--cream);
+      }
+      .plan-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 48px rgba(15, 32, 16, 0.09);
+      }
+      .plan-card.mid {
+        background: var(--g800);
+        border-color: var(--g600);
+      }
 
-.plan-badge{
-  position:absolute;top:-1px;left:50%;transform:translateX(-50%);
-  background:linear-gradient(90deg,var(--o500),var(--o400));
-  color:#fff;font-size:0.68rem;font-weight:600;letter-spacing:0.04em;
-  padding:4px 16px;border-radius:0 0 var(--r-sm) var(--r-sm);
-}
+      .plan-badge {
+        position: absolute;
+        top: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(90deg, var(--o500), var(--o400));
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        padding: 4px 16px;
+        border-radius: 0 0 var(--r-sm) var(--r-sm);
+      }
 
-.plan-icon-box{
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:1.2rem;font-size:1rem;
-}
-.plan-card:not(.mid) .plan-icon-box{background:var(--g100);color:var(--g600);border:1px solid rgba(45,107,48,0.12);}
-.plan-card.mid .plan-icon-box{background:rgba(130,201,135,0.1);color:var(--g300);border:1px solid rgba(130,201,135,0.2);}
+      .plan-icon-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+      }
+      .plan-card:not(.mid) .plan-icon-box {
+        background: var(--g100);
+        color: var(--g600);
+        border: 1px solid rgba(45, 107, 48, 0.12);
+      }
+      .plan-card.mid .plan-icon-box {
+        background: rgba(130, 201, 135, 0.1);
+        color: var(--g300);
+        border: 1px solid rgba(130, 201, 135, 0.2);
+      }
 
-.plan-type{
-  font-size:0.73rem;font-weight:600;letter-spacing:0.1em;
-  text-transform:uppercase;margin-bottom:0.5rem;
-}
-.plan-card:not(.mid) .plan-type{color:var(--muted);}
-.plan-card.mid .plan-type{color:var(--g300);}
+      .plan-type {
+        font-size: 0.73rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .plan-card:not(.mid) .plan-type {
+        color: var(--muted);
+      }
+      .plan-card.mid .plan-type {
+        color: var(--g300);
+      }
 
-.plan-price{
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.6rem;font-weight:700;line-height:1;
-  letter-spacing:-0.03em;margin-bottom:0.25rem;
-}
-.plan-card:not(.mid) .plan-price{color:var(--ink);}
-.plan-card.mid .plan-price{color:#fff;}
+      .plan-price {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.6rem;
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.25rem;
+      }
+      .plan-card:not(.mid) .plan-price {
+        color: var(--ink);
+      }
+      .plan-card.mid .plan-price {
+        color: #fff;
+      }
 
-.plan-period{font-size:0.78rem;margin-bottom:1.2rem;}
-.plan-card:not(.mid) .plan-period{color:var(--muted);}
-.plan-card.mid .plan-period{color:rgba(255,255,255,0.4);}
+      .plan-period {
+        font-size: 0.78rem;
+        margin-bottom: 1.2rem;
+      }
+      .plan-card:not(.mid) .plan-period {
+        color: var(--muted);
+      }
+      .plan-card.mid .plan-period {
+        color: rgba(255, 255, 255, 0.4);
+      }
 
-.plan-div{height:1px;margin:1.2rem 0;}
-.plan-card:not(.mid) .plan-div{background:rgba(45,107,48,0.1);}
-.plan-card.mid .plan-div{background:rgba(255,255,255,0.1);}
+      .plan-div {
+        height: 1px;
+        margin: 1.2rem 0;
+      }
+      .plan-card:not(.mid) .plan-div {
+        background: rgba(45, 107, 48, 0.1);
+      }
+      .plan-card.mid .plan-div {
+        background: rgba(255, 255, 255, 0.1);
+      }
 
-.plan-feats{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;}
-.pf{display:flex;align-items:center;gap:0.6rem;font-size:0.82rem;}
-.plan-card:not(.mid) .pf{color:var(--ink);}
-.plan-card.mid .pf{color:rgba(255,255,255,0.78);}
-.pf i{font-size:0.72rem;width:18px;text-align:center;flex-shrink:0;}
-.plan-card:not(.mid) .pf i{color:var(--g500);}
-.plan-card.mid .pf i{color:var(--g300);}
+      .plan-feats {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 2rem;
+      }
+      .pf {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.82rem;
+      }
+      .plan-card:not(.mid) .pf {
+        color: var(--ink);
+      }
+      .plan-card.mid .pf {
+        color: rgba(255, 255, 255, 0.78);
+      }
+      .pf i {
+        font-size: 0.72rem;
+        width: 18px;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .plan-card:not(.mid) .pf i {
+        color: var(--g500);
+      }
+      .plan-card.mid .pf i {
+        color: var(--g300);
+      }
 
-.plan-btn{
-  display:block;text-align:center;padding:0.85rem;
-  border-radius:var(--r-sm);font-weight:600;font-size:0.88rem;
-  text-decoration:none;transition:all 0.2s;
-}
-.plan-card:not(.mid) .plan-btn{
-  background:var(--parchment);color:var(--g700);
-  border:1.5px solid rgba(45,107,48,0.18);
-}
-.plan-card:not(.mid) .plan-btn:hover{background:var(--g100);}
-.plan-card.mid .plan-btn{
-  background:linear-gradient(135deg,var(--o500),var(--o400));
-  color:#fff;box-shadow:0 4px 20px rgba(200,120,32,0.35);
-}
-.plan-card.mid .plan-btn:hover{box-shadow:0 8px 28px rgba(200,120,32,0.5);transform:translateY(-1px);}
+      .plan-btn {
+        display: block;
+        text-align: center;
+        padding: 0.85rem;
+        border-radius: var(--r-sm);
+        font-weight: 600;
+        font-size: 0.88rem;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .plan-card:not(.mid) .plan-btn {
+        background: var(--parchment);
+        color: var(--g700);
+        border: 1.5px solid rgba(45, 107, 48, 0.18);
+      }
+      .plan-card:not(.mid) .plan-btn:hover {
+        background: var(--g100);
+      }
+      .plan-card.mid .plan-btn {
+        background: linear-gradient(135deg, var(--o500), var(--o400));
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(200, 120, 32, 0.35);
+      }
+      .plan-card.mid .plan-btn:hover {
+        box-shadow: 0 8px 28px rgba(200, 120, 32, 0.5);
+        transform: translateY(-1px);
+      }
 
-/* ── SOBRE ── */
-.sobre{padding:8rem 5%;background:var(--parchment);position:relative;overflow:hidden;}
-.sobre::before{
-  content:'';position:absolute;top:-40%;right:-8%;
-  width:550px;height:550px;border-radius:50%;
-  background:radial-gradient(circle,rgba(45,107,48,0.05),transparent 65%);
-}
-.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+      /* ── SOBRE ── */
+      .sobre {
+        padding: 8rem 5%;
+        background: var(--parchment);
+        position: relative;
+        overflow: hidden;
+      }
+      .sobre::before {
+        content: "";
+        position: absolute;
+        top: -40%;
+        right: -8%;
+        width: 550px;
+        height: 550px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(45, 107, 48, 0.05), transparent 65%);
+      }
+      .sobre-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+      }
 
-.quote-block{position:relative;}
-.quote-mark{
-  font-family:'Cormorant Garamond',serif;
-  font-size:7rem;font-weight:700;line-height:0.6;
-  color:var(--g200);position:absolute;top:0;left:-0.5rem;user-select:none;
-}
-.quote-text{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.5rem;font-weight:400;font-style:italic;
-  color:var(--ink);line-height:1.55;
-  padding-left:2rem;margin-bottom:2rem;position:relative;z-index:1;
-}
-.quote-author{
-  padding-left:2rem;display:flex;align-items:center;gap:1rem;
-}
-.author-avatar{
-  width:48px;height:48px;border-radius:50%;overflow:hidden;
-  border:2px solid var(--g300);flex-shrink:0;
-}
-.author-avatar img{width:100%;height:100%;object-fit:cover;}
-.author-name{font-size:0.88rem;font-weight:600;color:var(--ink);}
-.author-role{font-size:0.75rem;color:var(--muted);}
+      .quote-block {
+        position: relative;
+      }
+      .quote-mark {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 7rem;
+        font-weight: 700;
+        line-height: 0.6;
+        color: var(--g200);
+        position: absolute;
+        top: 0;
+        left: -0.5rem;
+        user-select: none;
+      }
+      .quote-text {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 400;
+        font-style: italic;
+        color: var(--ink);
+        line-height: 1.55;
+        padding-left: 2rem;
+        margin-bottom: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+      .quote-author {
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .author-avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid var(--g300);
+        flex-shrink: 0;
+      }
+      .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .author-name {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .author-role {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
 
-.origin-stats{display:flex;flex-direction:column;}
-.stat-row{
-  display:flex;align-items:center;gap:1.5rem;
-  padding:1.6rem 0;border-bottom:1px solid rgba(45,107,48,0.1);
-}
-.stat-row:first-child{padding-top:0;}
-.stat-row:last-child{border:none;padding-bottom:0;}
-.stat-icon-box{
-  width:46px;height:46px;border-radius:10px;flex-shrink:0;
-  background:var(--g100);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1rem;color:var(--g600);border:1px solid rgba(45,107,48,0.15);
-}
-.stat-big{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;font-weight:700;color:var(--g700);line-height:1;
-}
-.stat-ctx{font-size:0.78rem;color:var(--muted);line-height:1.5;margin-top:3px;}
+      .origin-stats {
+        display: flex;
+        flex-direction: column;
+      }
+      .stat-row {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.6rem 0;
+        border-bottom: 1px solid rgba(45, 107, 48, 0.1);
+      }
+      .stat-row:first-child {
+        padding-top: 0;
+      }
+      .stat-row:last-child {
+        border: none;
+        padding-bottom: 0;
+      }
+      .stat-icon-box {
+        width: 46px;
+        height: 46px;
+        border-radius: 10px;
+        flex-shrink: 0;
+        background: var(--g100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: var(--g600);
+        border: 1px solid rgba(45, 107, 48, 0.15);
+      }
+      .stat-big {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--g700);
+        line-height: 1;
+      }
+      .stat-ctx {
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin-top: 3px;
+      }
 
-/* ── CTA FINAL ── */
-.cta-final{
-  position:relative;min-height:480px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;overflow:hidden;
-}
-.cta-img-wrap{position:absolute;inset:0;z-index:0;}
-.cta-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-.cta-img-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:rgba(15,32,16,0.86);
-}
-.cta-content{position:relative;z-index:2;padding:4rem 2rem;max-width:640px;}
-.cta-content .eyebrow-sm{color:var(--g300);display:block;text-align:center;}
-.cta-content h2{color:#fff;margin-bottom:1rem;}
-.cta-content h2 em{color:var(--o300);}
-.cta-sub{font-size:0.98rem;color:rgba(255,255,255,0.52);margin-bottom:2.5rem;}
-.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+      /* ── CTA FINAL ── */
+      .cta-final {
+        position: relative;
+        min-height: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+      .cta-img-wrap {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+      }
+      .cta-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+      .cta-img-wrap::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 32, 16, 0.86);
+      }
+      .cta-content {
+        position: relative;
+        z-index: 2;
+        padding: 4rem 2rem;
+        max-width: 640px;
+      }
+      .cta-content .eyebrow-sm {
+        color: var(--g300);
+        display: block;
+        text-align: center;
+      }
+      .cta-content h2 {
+        color: #fff;
+        margin-bottom: 1rem;
+      }
+      .cta-content h2 em {
+        color: var(--o300);
+      }
+      .cta-sub {
+        font-size: 0.98rem;
+        color: rgba(255, 255, 255, 0.52);
+        margin-bottom: 2.5rem;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
 
-/* ── FOOTER ── */
-footer{
-  background:var(--g900);padding:2.8rem 5%;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
-.footer-logo{
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.25rem;font-weight:700;color:#fff;text-decoration:none;
-}
-.footer-logo span{color:var(--o400);}
-.footer-copy{font-size:0.76rem;color:rgba(255,255,255,0.3);}
-.footer-links{display:flex;gap:2rem;}
-.footer-links a{
-  font-size:0.76rem;color:rgba(255,255,255,0.32);
-  text-decoration:none;transition:color 0.2s;
-}
-.footer-links a:hover{color:rgba(255,255,255,0.7);}
+      /* ── FOOTER ── */
+      footer {
+        background: var(--g900);
+        padding: 2.8rem 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .footer-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+      }
+      .footer-logo span {
+        color: var(--o400);
+      }
+      .footer-copy {
+        font-size: 0.76rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .footer-links a {
+        font-size: 0.76rem;
+        color: rgba(255, 255, 255, 0.32);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
 
-/* ── ANIMAÇÕES ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+      /* ── ANIMAÇÕES ── */
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(28px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease;}
-.reveal.visible{opacity:1;transform:translateY(0);}
-.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .d1 {
+        transition-delay: 0.1s;
+      }
+      .d2 {
+        transition-delay: 0.2s;
+      }
+      .d3 {
+        transition-delay: 0.3s;
+      }
+      .d4 {
+        transition-delay: 0.4s;
+      }
 
-/* ── RESPONSIVE ── */
-@media(max-width:900px){
-  .audience-grid,.tecnico-block,.sobre-grid,.plans-row{grid-template-columns:1fr;}
-  .steps-grid{grid-template-columns:1fr 1fr;}.steps-grid::before{display:none;}
-  .tec-photo{min-height:300px;}
-  .bc.s7,.bc.s5,.bc.s4,.bc.s8{grid-column:span 12;}
-  .number-display{grid-template-columns:1fr 1fr;}
-  .nav-links{display:none;}
-  footer{flex-direction:column;text-align:center;}
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <a href="#" class="logo">Ibicultivo <div class="logo-dot"></div></a>
-  <div class="nav-links">
-    <a href="#funcionalidades">Funcionalidades</a>
-    <a href="#como">Como funciona</a>
-    <a href="#planos">Planos</a>
-    <a href="#sobre">Sobre</a>
-  </div>
-  <div class="nav-actions">
-    <a href="#" class="btn-ghost">Entrar</a>
-    <a href="#" class="btn-fill">Começar grátis</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-img-wrap">
-    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=85&fit=crop" alt="Campo agrícola verde">
-  </div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-dot"></div>
-      <i class="fa-solid fa-location-dot"></i> Feito na Serra da Ibiapaba — Ceará
-    </div>
-    <h1>
-      Sua lavoura<br>
-      <em>organizada.</em><br>
-      Sua colheita<br>
-      <span class="gold">valorizada.</span>
-    </h1>
-    <p class="hero-sub">
-      Plataforma de gestão e rastreabilidade agrícola criada para produtores 
-      e técnicos da Serra da Ibiapaba. Do plantio ao QR Code de origem, tudo em um lugar.
-    </p>
-    <div class="hero-ctas">
-      <a href="#" class="btn-hero-primary">
-        <i class="fa-solid fa-seedling"></i> Começar gratuitamente
-      </a>
-      <a href="#como" class="btn-hero-ghost">
-        <i class="fa-solid fa-play"></i> Ver como funciona
-      </a>
-    </div>
-    <div class="hero-proof">
-      <div class="proof-item">
-        <span class="proof-num">120+</span>
-        <span class="proof-label">Produtores</span>
+      /* ── RESPONSIVE ── */
+      @media (max-width: 900px) {
+        .audience-grid,
+        .tecnico-block,
+        .sobre-grid,
+        .plans-row {
+          grid-template-columns: 1fr;
+        }
+        .steps-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .steps-grid::before {
+          display: none;
+        }
+        .tec-photo {
+          min-height: 300px;
+        }
+        .bc.s7,
+        .bc.s5,
+        .bc.s4,
+        .bc.s8 {
+          grid-column: span 12;
+        }
+        .number-display {
+          grid-template-columns: 1fr 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        footer {
+          flex-direction: column;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav id="navbar">
+      <a href="#" class="logo"
+        >Ibicultivo
+        <div class="logo-dot"></div
+      ></a>
+      <div class="nav-links">
+        <a href="#funcionalidades">Funcionalidades</a>
+        <a href="#como">Como funciona</a>
+        <a href="#planos">Planos</a>
+        <a href="#sobre">Sobre</a>
       </div>
-      <div class="proof-item">
-        <span class="proof-num">50k</span>
-        <span class="proof-label">Lotes rastreados</span>
+      <div class="nav-actions">
+        <a href="#" class="btn-ghost">Entrar</a>
+        <a href="#" class="btn-fill">Começar grátis</a>
       </div>
-      <div class="proof-item">
-        <span class="proof-num">5</span>
-        <span class="proof-label">Estados</span>
-      </div>
-      <div class="proof-item">
-        <span class="proof-num">R$0</span>
-        <span class="proof-label">Para começar</span>
-      </div>
-    </div>
-  </div>
-</section>
+    </nav>
 
-<!-- MARQUEE -->
-<div class="strip">
-  <div class="strip-inner">
-    <span class="strip-item"><i class="fa-solid fa-route"></i> Rastreabilidade completa</span>
-    <span class="strip-item"><i class="fa-solid fa-qrcode"></i> QR Code de origem</span>
-    <span class="strip-item"><i class="fa-solid fa-map-location-dot"></i> Gestão de lotes por mapa</span>
-    <span class="strip-item"><i class="fa-solid fa-chart-line"></i> Painel de indicadores</span>
-    <span class="strip-item"><i class="fa-solid fa-file-lines"></i> Relatórios de safra</span>
-    <span class="strip-item"><i class="fa-solid fa-users"></i> Multi-produtor</span>
-    <span class="strip-item"><i class="fa-solid fa-wifi"></i> Funciona offline</span>
-    <span class="strip-item"><i class="fa-solid fa-leaf"></i> Feito no Ceará</span>
-    <span class="strip-item"><i class="fa-solid fa-route"></i> Rastreabilidade completa</span>
-    <span class="strip-item"><i class="fa-solid fa-qrcode"></i> QR Code de origem</span>
-    <span class="strip-item"><i class="fa-solid fa-map-location-dot"></i> Gestão de lotes por mapa</span>
-    <span class="strip-item"><i class="fa-solid fa-chart-line"></i> Painel de indicadores</span>
-    <span class="strip-item"><i class="fa-solid fa-file-lines"></i> Relatórios de safra</span>
-    <span class="strip-item"><i class="fa-solid fa-users"></i> Multi-produtor</span>
-    <span class="strip-item"><i class="fa-solid fa-wifi"></i> Funciona offline</span>
-    <span class="strip-item"><i class="fa-solid fa-leaf"></i> Feito no Ceará</span>
-  </div>
-</div>
-
-<!-- AUDIENCES -->
-<section class="audiences" id="funcionalidades">
-  <div class="section-header reveal">
-    <span class="eyebrow-sm">Para quem é o Ibicultivo</span>
-    <h2>Uma ferramenta, <em>dois perfis</em>, um objetivo</h2>
-    <p class="section-lead">Do agricultor familiar ao técnico agrícola — cada um com a interface que precisa e os dados que importam.</p>
-  </div>
-  <div class="audience-grid">
-
-    <div class="aud-card agricultor reveal d1">
-      <div class="aud-img-wrap">
-        <img src="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?w=900&q=80&fit=crop" alt="Agricultor colhendo tomate">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1800&q=85&fit=crop"
+          alt="Campo agrícola verde"
+        />
       </div>
-      <div class="aud-badge">
-        <i class="fa-solid fa-user"></i> Para o Agricultor
-      </div>
-      <div class="aud-body">
-        <div class="aud-icon-box"><i class="fa-solid fa-seedling"></i></div>
-        <h3 class="aud-title">Simples como anotar no caderno. Poderoso como nunca foi.</h3>
-        <p class="aud-desc">Sem complicação técnica. Cadastre seu cultivo, registre plantio e colheita, e gere um QR Code para valorizar seu produto na hora da venda.</p>
-        <div class="feature-pills">
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Cadastro pelo celular em minutos</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Registro de plantio, insumos e colheita</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> QR Code de origem para valorizar a venda</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Funciona com internet fraca ou offline</div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <div class="eyebrow-dot"></div>
+          <i class="fa-solid fa-location-dot"></i> Feito na Serra da Ibiapaba — Ceará
         </div>
-        <a href="#" class="aud-cta">Começar grátis <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>
-
-    <div class="aud-card tecnico reveal d2">
-      <div class="aud-img-wrap">
-        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=80&fit=crop" alt="Técnico agrícola com tablet">
-      </div>
-      <div class="aud-badge">
-        <i class="fa-solid fa-laptop"></i> Para o Técnico
-      </div>
-      <div class="aud-body">
-        <div class="aud-icon-box"><i class="fa-solid fa-chart-pie"></i></div>
-        <h3 class="aud-title">Gerencie múltiplos produtores. Decida com dados reais.</h3>
-        <p class="aud-desc">Dashboards completos, relatórios por safra, monitoramento de insumos e apoio técnico embasado em dados confiáveis.</p>
-        <div class="feature-pills">
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Painel multi-produtor consolidado</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Alertas de anomalias por lote</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> Exportação para laudos técnicos</div>
-          <div class="feat-pill"><div class="feat-check"><i class="fa-solid fa-check"></i></div> API para cooperativas e sistemas externos</div>
+        <h1>
+          Sua lavoura<br />
+          <em>organizada.</em><br />
+          Sua colheita<br />
+          <span class="gold">valorizada.</span>
+        </h1>
+        <p class="hero-sub">
+          Plataforma de gestão e rastreabilidade agrícola criada para produtores e técnicos da Serra
+          da Ibiapaba. Do plantio ao QR Code de origem, tudo em um lugar.
+        </p>
+        <div class="hero-ctas">
+          <a href="#" class="btn-hero-primary">
+            <i class="fa-solid fa-seedling"></i> Começar gratuitamente
+          </a>
+          <a href="#como" class="btn-hero-ghost">
+            <i class="fa-solid fa-play"></i> Ver como funciona
+          </a>
         </div>
-        <a href="#planos" class="aud-cta">Ver plano Cooperativa <i class="fa-solid fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how" id="como">
-  <div class="section-header reveal">
-    <span class="eyebrow-sm">Como funciona</span>
-    <h2>Do plantio ao comprador <em>em 4 passos</em></h2>
-    <p class="section-lead">Fluxo pensado para quem trabalha debaixo do sol — rápido, direto e sem burocracia.</p>
-  </div>
-  <div class="steps-grid">
-    <div class="step reveal d1">
-      <div class="step-orb"><i class="fa-solid fa-house"></i></div>
-      <p class="step-title">Cadastre sua propriedade</p>
-      <p class="step-desc">Registre seus lotes e cultivos no mapa. Simples como tirar uma foto.</p>
-    </div>
-    <div class="step reveal d2">
-      <div class="step-orb"><i class="fa-solid fa-pen-to-square"></i></div>
-      <p class="step-title">Registre cada etapa</p>
-      <p class="step-desc">Plantio, adubação, irrigação, colheita — tudo em tempo real pelo celular.</p>
-    </div>
-    <div class="step reveal d3">
-      <div class="step-orb"><i class="fa-solid fa-qrcode"></i></div>
-      <p class="step-title">Gere o QR Code</p>
-      <p class="step-desc">Cada lote ganha um código de rastreabilidade. Imprime e cola na caixa.</p>
-    </div>
-    <div class="step reveal d4">
-      <div class="step-orb"><i class="fa-solid fa-hand-holding-dollar"></i></div>
-      <p class="step-title">Venda com mais valor</p>
-      <p class="step-desc">O comprador escaneia e vê origem, práticas e qualidade do produto.</p>
-    </div>
-  </div>
-</section>
-
-<!-- SERRA BLOCK -->
-<div class="serra-block">
-  <div class="serra-img-wrap">
-    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1800&q=85&fit=crop" alt="Paisagem da Serra da Ibiapaba">
-  </div>
-  <div class="serra-content">
-    <span class="eyebrow-sm" style="color:var(--g300)">Nossa região</span>
-    <h2 style="color:#fff;font-size:clamp(2rem,4.5vw,3.2rem)">
-      A Serra da Ibiapaba<br>
-      <em style="color:var(--o300)">produz R$ 1,9 bilhão</em><br>
-      por ano em agronegócio
-    </h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:0.98rem;line-height:1.75;margin-top:1rem;max-width:480px">
-      Maracujá, tomate, abacate, batata-doce — culturas que o Ibicultivo já atende. 
-      Uma região que merecia uma ferramenta feita para ela.
-    </p>
-    <div class="number-display">
-      <div>
-        <div class="num-val">R$1,9B</div>
-        <div class="num-label">Valor da produção<br>agrícola em 2023</div>
-      </div>
-      <div>
-        <div class="num-val">444k</div>
-        <div class="num-label">Habitantes na<br>Serra da Ibiapaba</div>
-      </div>
-      <div>
-        <div class="num-val">26k+</div>
-        <div class="num-label">Empresas ativas<br>na região</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- APP PREVIEW BENTO -->
-<section class="app-preview">
-  <div class="section-header reveal">
-    <span class="eyebrow-sm">Plataforma</span>
-    <h2>Tudo que você precisa, <em>num só painel</em></h2>
-    <p class="section-lead">Interface limpa, dados em tempo real, sem curva de aprendizado.</p>
-  </div>
-  <div class="bento">
-
-    <!-- Stats -->
-    <div class="bc s7 b-stats reveal">
-      <div class="b-lbl"><i class="fa-solid fa-chart-bar"></i> Desempenho desta safra</div>
-      <div class="b-title">Safra de Tomate — Lote #0034 · São Benedito</div>
-      <div class="metrics-row">
-        <div class="met"><div class="met-val">7,3t</div><div class="met-lbl">Produção estimada</div></div>
-        <div class="met"><div class="met-val">R$41k</div><div class="met-lbl">Receita projetada</div></div>
-      </div>
-      <div class="chart-bars">
-        <div class="bar" style="height:35%"></div>
-        <div class="bar" style="height:50%"></div>
-        <div class="bar" style="height:42%"></div>
-        <div class="bar" style="height:65%"></div>
-        <div class="bar" style="height:55%"></div>
-        <div class="bar" style="height:70%"></div>
-        <div class="bar" style="height:48%"></div>
-        <div class="bar hi" style="height:90%"></div>
-      </div>
-    </div>
-
-    <!-- Lotes -->
-    <div class="bc s5 b-lotes reveal d1">
-      <div class="b-lbl" style="color:var(--muted)"><i class="fa-solid fa-seedling"></i> Cultivos ativos</div>
-      <div class="lote-row"><div class="l-dot g"></div><span class="l-name">Tomate Italiano</span><span class="l-area">2,4 ha</span><span class="l-tag t-g">Crescendo</span></div>
-      <div class="lote-row"><div class="l-dot a"></div><span class="l-name">Abacate Hass</span><span class="l-area">1,8 ha</span><span class="l-tag t-a">Colheita próx.</span></div>
-      <div class="lote-row"><div class="l-dot g"></div><span class="l-name">Maracujá Azedo</span><span class="l-area">3,1 ha</span><span class="l-tag t-g">Monitorando</span></div>
-      <div class="lote-row"><div class="l-dot b"></div><span class="l-name">Batata-doce</span><span class="l-area">0,9 ha</span><span class="l-tag t-g">Plantio</span></div>
-    </div>
-
-    <!-- QR -->
-    <div class="bc s4 b-qr reveal d2">
-      <div class="qr-svg-wrap">
-        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="30" height="30" rx="4" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="3"/>
-          <rect x="10" y="10" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)"/>
-          <rect x="48" y="2" width="30" height="30" rx="4" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="3"/>
-          <rect x="56" y="10" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)"/>
-          <rect x="2" y="48" width="30" height="30" rx="4" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="3"/>
-          <rect x="10" y="56" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)"/>
-          <rect x="48" y="48" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
-          <rect x="60" y="48" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
-          <rect x="48" y="60" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
-          <rect x="60" y="60" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)"/>
-          <rect x="38" y="38" width="6" height="6" rx="1" fill="rgba(255,255,255,0.9)"/>
-        </svg>
-      </div>
-      <p><strong>QR Code de origem</strong><br>O comprador rastreia a procedência com um scan</p>
-    </div>
-
-    <!-- Mapa -->
-    <div class="bc s4 b-map reveal d3">
-      <div class="b-lbl"><i class="fa-solid fa-map-location-dot"></i> Lotes no mapa</div>
-      <div class="map-canvas">
-        <div class="t-line" style="top:28%;transform:rotate(-2deg)"></div>
-        <div class="t-line" style="top:52%;opacity:.4;transform:rotate(1.5deg)"></div>
-        <div class="t-line" style="top:74%;opacity:.25;transform:rotate(-1deg)"></div>
-        <div class="pin" style="left:38%;top:22%">
-          <div class="pin-dot"></div>
-          <div class="pin-lbl">São Benedito</div>
-        </div>
-        <div class="pin" style="left:65%;top:50%">
-          <div class="pin-dot gd"></div>
-          <div class="pin-lbl">Ibiapina</div>
-        </div>
-        <div class="pin" style="left:22%;top:68%">
-          <div class="pin-dot" style="background:#5B8ED6;box-shadow:0 0 0 4px rgba(91,142,214,0.2)"></div>
-          <div class="pin-lbl">Tianguá</div>
+        <div class="hero-proof">
+          <div class="proof-item">
+            <span class="proof-num">120+</span>
+            <span class="proof-label">Produtores</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-num">50k</span>
+            <span class="proof-label">Lotes rastreados</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-num">5</span>
+            <span class="proof-label">Estados</span>
+          </div>
+          <div class="proof-item">
+            <span class="proof-num">R$0</span>
+            <span class="proof-label">Para começar</span>
+          </div>
         </div>
       </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="strip">
+      <div class="strip-inner">
+        <span class="strip-item"><i class="fa-solid fa-route"></i> Rastreabilidade completa</span>
+        <span class="strip-item"><i class="fa-solid fa-qrcode"></i> QR Code de origem</span>
+        <span class="strip-item"
+          ><i class="fa-solid fa-map-location-dot"></i> Gestão de lotes por mapa</span
+        >
+        <span class="strip-item"><i class="fa-solid fa-chart-line"></i> Painel de indicadores</span>
+        <span class="strip-item"><i class="fa-solid fa-file-lines"></i> Relatórios de safra</span>
+        <span class="strip-item"><i class="fa-solid fa-users"></i> Multi-produtor</span>
+        <span class="strip-item"><i class="fa-solid fa-wifi"></i> Funciona offline</span>
+        <span class="strip-item"><i class="fa-solid fa-leaf"></i> Feito no Ceará</span>
+        <span class="strip-item"><i class="fa-solid fa-route"></i> Rastreabilidade completa</span>
+        <span class="strip-item"><i class="fa-solid fa-qrcode"></i> QR Code de origem</span>
+        <span class="strip-item"
+          ><i class="fa-solid fa-map-location-dot"></i> Gestão de lotes por mapa</span
+        >
+        <span class="strip-item"><i class="fa-solid fa-chart-line"></i> Painel de indicadores</span>
+        <span class="strip-item"><i class="fa-solid fa-file-lines"></i> Relatórios de safra</span>
+        <span class="strip-item"><i class="fa-solid fa-users"></i> Multi-produtor</span>
+        <span class="strip-item"><i class="fa-solid fa-wifi"></i> Funciona offline</span>
+        <span class="strip-item"><i class="fa-solid fa-leaf"></i> Feito no Ceará</span>
+      </div>
     </div>
 
-    <!-- Score -->
-    <div class="bc s4 b-score reveal d4">
-      <div class="b-lbl" style="color:var(--muted);margin-bottom:1.2rem"><i class="fa-solid fa-star"></i> Índice de qualidade</div>
-      <div class="score-ring" id="scoreRing">
-        <svg viewBox="0 0 90 90">
-          <circle class="tr" cx="45" cy="45" r="35"/>
-          <circle class="fi" id="scoreFill" cx="45" cy="45" r="35"/>
-        </svg>
-        <div class="score-center">
-          <span class="score-n">92</span>
-          <span class="score-s">/ 100</span>
+    <!-- AUDIENCES -->
+    <section class="audiences" id="funcionalidades">
+      <div class="section-header reveal">
+        <span class="eyebrow-sm">Para quem é o Ibicultivo</span>
+        <h2>Uma ferramenta, <em>dois perfis</em>, um objetivo</h2>
+        <p class="section-lead">
+          Do agricultor familiar ao técnico agrícola — cada um com a interface que precisa e os
+          dados que importam.
+        </p>
+      </div>
+      <div class="audience-grid">
+        <div class="aud-card agricultor reveal d1">
+          <div class="aud-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1595113316349-9fa4eb24f884?w=900&q=80&fit=crop"
+              alt="Agricultor colhendo tomate"
+            />
+          </div>
+          <div class="aud-badge"><i class="fa-solid fa-user"></i> Para o Agricultor</div>
+          <div class="aud-body">
+            <div class="aud-icon-box"><i class="fa-solid fa-seedling"></i></div>
+            <h3 class="aud-title">Simples como anotar no caderno. Poderoso como nunca foi.</h3>
+            <p class="aud-desc">
+              Sem complicação técnica. Cadastre seu cultivo, registre plantio e colheita, e gere um
+              QR Code para valorizar seu produto na hora da venda.
+            </p>
+            <div class="feature-pills">
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Cadastro pelo celular em minutos
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Registro de plantio, insumos e colheita
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                QR Code de origem para valorizar a venda
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Funciona com internet fraca ou offline
+              </div>
+            </div>
+            <a href="#" class="aud-cta">Começar grátis <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="aud-card tecnico reveal d2">
+          <div class="aud-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=900&q=80&fit=crop"
+              alt="Técnico agrícola com tablet"
+            />
+          </div>
+          <div class="aud-badge"><i class="fa-solid fa-laptop"></i> Para o Técnico</div>
+          <div class="aud-body">
+            <div class="aud-icon-box"><i class="fa-solid fa-chart-pie"></i></div>
+            <h3 class="aud-title">Gerencie múltiplos produtores. Decida com dados reais.</h3>
+            <p class="aud-desc">
+              Dashboards completos, relatórios por safra, monitoramento de insumos e apoio técnico
+              embasado em dados confiáveis.
+            </p>
+            <div class="feature-pills">
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Painel multi-produtor consolidado
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Alertas de anomalias por lote
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                Exportação para laudos técnicos
+              </div>
+              <div class="feat-pill">
+                <div class="feat-check"><i class="fa-solid fa-check"></i></div>
+                API para cooperativas e sistemas externos
+              </div>
+            </div>
+            <a href="#planos" class="aud-cta"
+              >Ver plano Cooperativa <i class="fa-solid fa-arrow-right"></i
+            ></a>
+          </div>
         </div>
       </div>
-      <p>Lote #0034 · Tomate Italiano<br><strong>Excelente procedência</strong></p>
-    </div>
+    </section>
 
-  </div>
-</section>
-
-<!-- TÉCNICO BLOCK -->
-<div class="tecnico-block">
-  <div class="tec-photo">
-    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&q=80&fit=crop&crop=top" alt="Técnico agrícola em campo">
-  </div>
-  <div class="tec-content">
-    <span class="eyebrow-sm">Para o técnico agrícola</span>
-    <h2>Monitore dezenas de<br><em>produtores</em> de uma tela</h2>
-    <p class="section-lead">Chega de planilha. O Ibicultivo centraliza todos os seus produtores com dados reais.</p>
-    <div class="feat-list">
-      <div class="feat-item">
-        <div class="feat-ibox"><i class="fa-solid fa-table-columns"></i></div>
-        <div class="feat-text">
-          <h4>Painel multi-produtor</h4>
-          <p>Todos os produtores em uma visão única, com alertas de anomalias em tempo real.</p>
+    <!-- HOW IT WORKS -->
+    <section class="how" id="como">
+      <div class="section-header reveal">
+        <span class="eyebrow-sm">Como funciona</span>
+        <h2>Do plantio ao comprador <em>em 4 passos</em></h2>
+        <p class="section-lead">
+          Fluxo pensado para quem trabalha debaixo do sol — rápido, direto e sem burocracia.
+        </p>
+      </div>
+      <div class="steps-grid">
+        <div class="step reveal d1">
+          <div class="step-orb"><i class="fa-solid fa-house"></i></div>
+          <p class="step-title">Cadastre sua propriedade</p>
+          <p class="step-desc">
+            Registre seus lotes e cultivos no mapa. Simples como tirar uma foto.
+          </p>
+        </div>
+        <div class="step reveal d2">
+          <div class="step-orb"><i class="fa-solid fa-pen-to-square"></i></div>
+          <p class="step-title">Registre cada etapa</p>
+          <p class="step-desc">
+            Plantio, adubação, irrigação, colheita — tudo em tempo real pelo celular.
+          </p>
+        </div>
+        <div class="step reveal d3">
+          <div class="step-orb"><i class="fa-solid fa-qrcode"></i></div>
+          <p class="step-title">Gere o QR Code</p>
+          <p class="step-desc">
+            Cada lote ganha um código de rastreabilidade. Imprime e cola na caixa.
+          </p>
+        </div>
+        <div class="step reveal d4">
+          <div class="step-orb"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <p class="step-title">Venda com mais valor</p>
+          <p class="step-desc">
+            O comprador escaneia e vê origem, práticas e qualidade do produto.
+          </p>
         </div>
       </div>
-      <div class="feat-item">
-        <div class="feat-ibox"><i class="fa-solid fa-file-export"></i></div>
-        <div class="feat-text">
-          <h4>Relatórios para laudos técnicos</h4>
-          <p>Exporte dados de insumos, colheita e produtividade em PDF direto para o laudo.</p>
-        </div>
-      </div>
-      <div class="feat-item">
-        <div class="feat-ibox"><i class="fa-solid fa-plug"></i></div>
-        <div class="feat-text">
-          <h4>API para cooperativas</h4>
-          <p>Integre com os sistemas da sua cooperativa ou associação de produtores.</p>
-        </div>
-      </div>
-    </div>
-    <a href="#planos" class="btn-fill" style="width:fit-content">Ver plano Cooperativa <i class="fa-solid fa-arrow-right" style="margin-left:0.4rem"></i></a>
-  </div>
-</div>
+    </section>
 
-<!-- PLANOS -->
-<section class="plans" id="planos">
-  <div class="plans-header reveal">
-    <span class="eyebrow-sm" style="display:block;text-align:center">Planos e preços</span>
-    <h2 style="text-align:center">Comece grátis. <em>Cresça no seu ritmo.</em></h2>
-    <p class="section-lead" style="text-align:center;margin:0.9rem auto 0">Sem fidelidade. Cancele quando quiser. Suporte em português.</p>
-  </div>
-  <div class="plans-row">
-    <div class="plan-card reveal d1">
-      <div class="plan-icon-box"><i class="fa-solid fa-seedling"></i></div>
-      <p class="plan-type">Gratuito</p>
-      <p class="plan-price">R$ 0</p>
-      <p class="plan-period">/mês, para sempre</p>
-      <div class="plan-div"></div>
-      <div class="plan-feats">
-        <div class="pf"><i class="fa-solid fa-check"></i>Até 2 cultivos ativos</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Até 10 lotes/mês</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>QR Code de origem básico</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Suporte por WhatsApp</div>
+    <!-- SERRA BLOCK -->
+    <div class="serra-block">
+      <div class="serra-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1800&q=85&fit=crop"
+          alt="Paisagem da Serra da Ibiapaba"
+        />
       </div>
-      <a href="#" class="plan-btn">Criar conta grátis</a>
-    </div>
-
-    <div class="plan-card mid reveal d2">
-      <span class="plan-badge">Mais popular</span>
-      <div class="plan-icon-box"><i class="fa-solid fa-rocket"></i></div>
-      <p class="plan-type">Pro</p>
-      <p class="plan-price">R$ 49</p>
-      <p class="plan-period">/mês por produtor</p>
-      <div class="plan-div"></div>
-      <div class="plan-feats">
-        <div class="pf"><i class="fa-solid fa-check"></i>Cultivos e lotes ilimitados</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Dashboard de indicadores</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Relatórios exportáveis</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>QR Code personalizado</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Suporte prioritário</div>
-      </div>
-      <a href="#" class="plan-btn">Assinar Pro</a>
-    </div>
-
-    <div class="plan-card reveal d3">
-      <div class="plan-icon-box"><i class="fa-solid fa-handshake"></i></div>
-      <p class="plan-type">Cooperativa</p>
-      <p class="plan-price" style="font-size:1.7rem">Sob consulta</p>
-      <p class="plan-period">para equipes e cooperativas</p>
-      <div class="plan-div"></div>
-      <div class="plan-feats">
-        <div class="pf"><i class="fa-solid fa-check"></i>Multi-produtor ilimitado</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>API e integrações</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>Treinamento presencial</div>
-        <div class="pf"><i class="fa-solid fa-check"></i>SLA e suporte dedicado</div>
-      </div>
-      <a href="#" class="plan-btn">Falar com a equipe</a>
-    </div>
-  </div>
-</section>
-
-<!-- SOBRE -->
-<section class="sobre" id="sobre">
-  <div class="sobre-grid">
-    <div class="quote-block reveal">
-      <div class="quote-mark">"</div>
-      <p class="quote-text">
-        Antes eu não sabia quanto cada lote me dava de lucro. 
-        Com o Ibicultivo, consigo comparar safra por safra e 
-        vender o tomate com mais valor porque o comprador 
-        vê de onde vem.
-      </p>
-      <div class="quote-author">
-        <div class="author-avatar">
-          <img src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=80&fit=crop&crop=face" alt="Produtor Francisco Alves">
-        </div>
-        <div>
-          <p class="author-name">Francisco Alves</p>
-          <p class="author-role">Produtor de tomate · São Benedito — CE</p>
+      <div class="serra-content">
+        <span class="eyebrow-sm" style="color: var(--g300)">Nossa região</span>
+        <h2 style="color: #fff; font-size: clamp(2rem, 4.5vw, 3.2rem)">
+          A Serra da Ibiapaba<br />
+          <em style="color: var(--o300)">produz R$ 1,9 bilhão</em><br />
+          por ano em agronegócio
+        </h2>
+        <p
+          style="
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.98rem;
+            line-height: 1.75;
+            margin-top: 1rem;
+            max-width: 480px;
+          "
+        >
+          Maracujá, tomate, abacate, batata-doce — culturas que o Ibicultivo já atende. Uma região
+          que merecia uma ferramenta feita para ela.
+        </p>
+        <div class="number-display">
+          <div>
+            <div class="num-val">R$1,9B</div>
+            <div class="num-label">Valor da produção<br />agrícola em 2023</div>
+          </div>
+          <div>
+            <div class="num-val">444k</div>
+            <div class="num-label">Habitantes na<br />Serra da Ibiapaba</div>
+          </div>
+          <div>
+            <div class="num-val">26k+</div>
+            <div class="num-label">Empresas ativas<br />na região</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="origin-stats reveal d2">
-      <div class="stat-row">
-        <div class="stat-icon-box"><i class="fa-solid fa-mountain-sun"></i></div>
-        <div>
-          <div class="stat-big">R$ 1,9B</div>
-          <div class="stat-ctx">Valor da produção agrícola da Serra da Ibiapaba em 2023, segundo IBGE/SEBRAE</div>
+    <!-- APP PREVIEW BENTO -->
+    <section class="app-preview">
+      <div class="section-header reveal">
+        <span class="eyebrow-sm">Plataforma</span>
+        <h2>Tudo que você precisa, <em>num só painel</em></h2>
+        <p class="section-lead">Interface limpa, dados em tempo real, sem curva de aprendizado.</p>
+      </div>
+      <div class="bento">
+        <!-- Stats -->
+        <div class="bc s7 b-stats reveal">
+          <div class="b-lbl"><i class="fa-solid fa-chart-bar"></i> Desempenho desta safra</div>
+          <div class="b-title">Safra de Tomate — Lote #0034 · São Benedito</div>
+          <div class="metrics-row">
+            <div class="met">
+              <div class="met-val">7,3t</div>
+              <div class="met-lbl">Produção estimada</div>
+            </div>
+            <div class="met">
+              <div class="met-val">R$41k</div>
+              <div class="met-lbl">Receita projetada</div>
+            </div>
+          </div>
+          <div class="chart-bars">
+            <div class="bar" style="height: 35%"></div>
+            <div class="bar" style="height: 50%"></div>
+            <div class="bar" style="height: 42%"></div>
+            <div class="bar" style="height: 65%"></div>
+            <div class="bar" style="height: 55%"></div>
+            <div class="bar" style="height: 70%"></div>
+            <div class="bar" style="height: 48%"></div>
+            <div class="bar hi" style="height: 90%"></div>
+          </div>
+        </div>
+
+        <!-- Lotes -->
+        <div class="bc s5 b-lotes reveal d1">
+          <div class="b-lbl" style="color: var(--muted)">
+            <i class="fa-solid fa-seedling"></i> Cultivos ativos
+          </div>
+          <div class="lote-row">
+            <div class="l-dot g"></div>
+            <span class="l-name">Tomate Italiano</span><span class="l-area">2,4 ha</span
+            ><span class="l-tag t-g">Crescendo</span>
+          </div>
+          <div class="lote-row">
+            <div class="l-dot a"></div>
+            <span class="l-name">Abacate Hass</span><span class="l-area">1,8 ha</span
+            ><span class="l-tag t-a">Colheita próx.</span>
+          </div>
+          <div class="lote-row">
+            <div class="l-dot g"></div>
+            <span class="l-name">Maracujá Azedo</span><span class="l-area">3,1 ha</span
+            ><span class="l-tag t-g">Monitorando</span>
+          </div>
+          <div class="lote-row">
+            <div class="l-dot b"></div>
+            <span class="l-name">Batata-doce</span><span class="l-area">0,9 ha</span
+            ><span class="l-tag t-g">Plantio</span>
+          </div>
+        </div>
+
+        <!-- QR -->
+        <div class="bc s4 b-qr reveal d2">
+          <div class="qr-svg-wrap">
+            <svg
+              width="80"
+              height="80"
+              viewBox="0 0 80 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="2"
+                y="2"
+                width="30"
+                height="30"
+                rx="4"
+                fill="none"
+                stroke="rgba(255,255,255,0.9)"
+                stroke-width="3"
+              />
+              <rect x="10" y="10" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)" />
+              <rect
+                x="48"
+                y="2"
+                width="30"
+                height="30"
+                rx="4"
+                fill="none"
+                stroke="rgba(255,255,255,0.9)"
+                stroke-width="3"
+              />
+              <rect x="56" y="10" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)" />
+              <rect
+                x="2"
+                y="48"
+                width="30"
+                height="30"
+                rx="4"
+                fill="none"
+                stroke="rgba(255,255,255,0.9)"
+                stroke-width="3"
+              />
+              <rect x="10" y="56" width="14" height="14" rx="2" fill="rgba(255,255,255,0.9)" />
+              <rect x="48" y="48" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)" />
+              <rect x="60" y="48" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)" />
+              <rect x="48" y="60" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)" />
+              <rect x="60" y="60" width="8" height="8" rx="1" fill="rgba(255,255,255,0.9)" />
+              <rect x="38" y="38" width="6" height="6" rx="1" fill="rgba(255,255,255,0.9)" />
+            </svg>
+          </div>
+          <p>
+            <strong>QR Code de origem</strong><br />O comprador rastreia a procedência com um scan
+          </p>
+        </div>
+
+        <!-- Mapa -->
+        <div class="bc s4 b-map reveal d3">
+          <div class="b-lbl"><i class="fa-solid fa-map-location-dot"></i> Lotes no mapa</div>
+          <div class="map-canvas">
+            <div class="t-line" style="top: 28%; transform: rotate(-2deg)"></div>
+            <div class="t-line" style="top: 52%; opacity: 0.4; transform: rotate(1.5deg)"></div>
+            <div class="t-line" style="top: 74%; opacity: 0.25; transform: rotate(-1deg)"></div>
+            <div class="pin" style="left: 38%; top: 22%">
+              <div class="pin-dot"></div>
+              <div class="pin-lbl">São Benedito</div>
+            </div>
+            <div class="pin" style="left: 65%; top: 50%">
+              <div class="pin-dot gd"></div>
+              <div class="pin-lbl">Ibiapina</div>
+            </div>
+            <div class="pin" style="left: 22%; top: 68%">
+              <div
+                class="pin-dot"
+                style="background: #5b8ed6; box-shadow: 0 0 0 4px rgba(91, 142, 214, 0.2)"
+              ></div>
+              <div class="pin-lbl">Tianguá</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Score -->
+        <div class="bc s4 b-score reveal d4">
+          <div class="b-lbl" style="color: var(--muted); margin-bottom: 1.2rem">
+            <i class="fa-solid fa-star"></i> Índice de qualidade
+          </div>
+          <div class="score-ring" id="scoreRing">
+            <svg viewBox="0 0 90 90">
+              <circle class="tr" cx="45" cy="45" r="35" />
+              <circle class="fi" id="scoreFill" cx="45" cy="45" r="35" />
+            </svg>
+            <div class="score-center">
+              <span class="score-n">92</span>
+              <span class="score-s">/ 100</span>
+            </div>
+          </div>
+          <p>Lote #0034 · Tomate Italiano<br /><strong>Excelente procedência</strong></p>
         </div>
       </div>
-      <div class="stat-row">
-        <div class="stat-icon-box"><i class="fa-solid fa-people-group"></i></div>
-        <div>
-          <div class="stat-big">444 mil</div>
-          <div class="stat-ctx">Habitantes na região — uma população produtiva aguardando tecnologia local</div>
-        </div>
+    </section>
+
+    <!-- TÉCNICO BLOCK -->
+    <div class="tecnico-block">
+      <div class="tec-photo">
+        <img
+          src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=900&q=80&fit=crop&crop=top"
+          alt="Técnico agrícola em campo"
+        />
       </div>
-      <div class="stat-row">
-        <div class="stat-icon-box"><i class="fa-solid fa-location-dot"></i></div>
-        <div>
-          <div class="stat-big">Guaraciaba</div>
-          <div class="stat-ctx">Nossa origem — nascemos no coração da Serra para servir a Serra</div>
+      <div class="tec-content">
+        <span class="eyebrow-sm">Para o técnico agrícola</span>
+        <h2>Monitore dezenas de<br /><em>produtores</em> de uma tela</h2>
+        <p class="section-lead">
+          Chega de planilha. O Ibicultivo centraliza todos os seus produtores com dados reais.
+        </p>
+        <div class="feat-list">
+          <div class="feat-item">
+            <div class="feat-ibox"><i class="fa-solid fa-table-columns"></i></div>
+            <div class="feat-text">
+              <h4>Painel multi-produtor</h4>
+              <p>Todos os produtores em uma visão única, com alertas de anomalias em tempo real.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ibox"><i class="fa-solid fa-file-export"></i></div>
+            <div class="feat-text">
+              <h4>Relatórios para laudos técnicos</h4>
+              <p>Exporte dados de insumos, colheita e produtividade em PDF direto para o laudo.</p>
+            </div>
+          </div>
+          <div class="feat-item">
+            <div class="feat-ibox"><i class="fa-solid fa-plug"></i></div>
+            <div class="feat-text">
+              <h4>API para cooperativas</h4>
+              <p>Integre com os sistemas da sua cooperativa ou associação de produtores.</p>
+            </div>
+          </div>
         </div>
+        <a href="#planos" class="btn-fill" style="width: fit-content"
+          >Ver plano Cooperativa <i class="fa-solid fa-arrow-right" style="margin-left: 0.4rem"></i
+        ></a>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- CTA FINAL -->
-<section class="cta-final" id="contato">
-  <div class="cta-img-wrap">
-    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1800&q=80&fit=crop" alt="Campo agrícola ao entardecer">
-  </div>
-  <div class="cta-content reveal">
-    <span class="eyebrow-sm">Comece agora</span>
-    <h2>Sua lavoura merece<br><em>mais do que um caderno.</em></h2>
-    <p class="cta-sub">Crie sua conta em menos de 2 minutos. Sem cartão de crédito.</p>
-    <div class="cta-btns">
-      <a href="#" class="btn-hero-primary"><i class="fa-solid fa-seedling"></i> Começar gratuitamente</a>
-      <a href="#" class="btn-hero-ghost"><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a>
-    </div>
-  </div>
-</section>
+    <!-- PLANOS -->
+    <section class="plans" id="planos">
+      <div class="plans-header reveal">
+        <span class="eyebrow-sm" style="display: block; text-align: center">Planos e preços</span>
+        <h2 style="text-align: center">Comece grátis. <em>Cresça no seu ritmo.</em></h2>
+        <p class="section-lead" style="text-align: center; margin: 0.9rem auto 0">
+          Sem fidelidade. Cancele quando quiser. Suporte em português.
+        </p>
+      </div>
+      <div class="plans-row">
+        <div class="plan-card reveal d1">
+          <div class="plan-icon-box"><i class="fa-solid fa-seedling"></i></div>
+          <p class="plan-type">Gratuito</p>
+          <p class="plan-price">R$ 0</p>
+          <p class="plan-period">/mês, para sempre</p>
+          <div class="plan-div"></div>
+          <div class="plan-feats">
+            <div class="pf"><i class="fa-solid fa-check"></i>Até 2 cultivos ativos</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Até 10 lotes/mês</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>QR Code de origem básico</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Suporte por WhatsApp</div>
+          </div>
+          <a href="#" class="plan-btn">Criar conta grátis</a>
+        </div>
 
-<!-- FOOTER -->
-<footer>
-  <a href="#" class="footer-logo">Ibicultivo<span>.</span></a>
-  <span class="footer-copy">© 2025 Ibicultivo · Guaraciaba do Norte — CE</span>
-  <div class="footer-links">
-    <a href="#">Termos</a>
-    <a href="#">Privacidade</a>
-    <a href="mailto:contato@ibicultivo.com.br">contato@ibicultivo.com.br</a>
-  </div>
-</footer>
+        <div class="plan-card mid reveal d2">
+          <span class="plan-badge">Mais popular</span>
+          <div class="plan-icon-box"><i class="fa-solid fa-rocket"></i></div>
+          <p class="plan-type">Pro</p>
+          <p class="plan-price">R$ 49</p>
+          <p class="plan-period">/mês por produtor</p>
+          <div class="plan-div"></div>
+          <div class="plan-feats">
+            <div class="pf"><i class="fa-solid fa-check"></i>Cultivos e lotes ilimitados</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Dashboard de indicadores</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Relatórios exportáveis</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>QR Code personalizado</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Suporte prioritário</div>
+          </div>
+          <a href="#" class="plan-btn">Assinar Pro</a>
+        </div>
 
-<script>
-// Scroll reveal
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, {threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+        <div class="plan-card reveal d3">
+          <div class="plan-icon-box"><i class="fa-solid fa-handshake"></i></div>
+          <p class="plan-type">Cooperativa</p>
+          <p class="plan-price" style="font-size: 1.7rem">Sob consulta</p>
+          <p class="plan-period">para equipes e cooperativas</p>
+          <div class="plan-div"></div>
+          <div class="plan-feats">
+            <div class="pf"><i class="fa-solid fa-check"></i>Multi-produtor ilimitado</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>API e integrações</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>Treinamento presencial</div>
+            <div class="pf"><i class="fa-solid fa-check"></i>SLA e suporte dedicado</div>
+          </div>
+          <a href="#" class="plan-btn">Falar com a equipe</a>
+        </div>
+      </div>
+    </section>
 
-// Navbar shadow on scroll
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-});
+    <!-- SOBRE -->
+    <section class="sobre" id="sobre">
+      <div class="sobre-grid">
+        <div class="quote-block reveal">
+          <div class="quote-mark">"</div>
+          <p class="quote-text">
+            Antes eu não sabia quanto cada lote me dava de lucro. Com o Ibicultivo, consigo comparar
+            safra por safra e vender o tomate com mais valor porque o comprador vê de onde vem.
+          </p>
+          <div class="quote-author">
+            <div class="author-avatar">
+              <img
+                src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?w=100&q=80&fit=crop&crop=face"
+                alt="Produtor Francisco Alves"
+              />
+            </div>
+            <div>
+              <p class="author-name">Francisco Alves</p>
+              <p class="author-role">Produtor de tomate · São Benedito — CE</p>
+            </div>
+          </div>
+        </div>
 
-// Score ring animation
-const scoreObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){
-      const fill = document.getElementById('scoreFill');
-      if(fill) setTimeout(() => fill.style.strokeDashoffset = '50', 300);
-      scoreObs.unobserve(e.target);
-    }
-  });
-}, {threshold:0.5});
-const ring = document.getElementById('scoreRing');
-if(ring) scoreObs.observe(ring);
-</script>
-</body>
+        <div class="origin-stats reveal d2">
+          <div class="stat-row">
+            <div class="stat-icon-box"><i class="fa-solid fa-mountain-sun"></i></div>
+            <div>
+              <div class="stat-big">R$ 1,9B</div>
+              <div class="stat-ctx">
+                Valor da produção agrícola da Serra da Ibiapaba em 2023, segundo IBGE/SEBRAE
+              </div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon-box"><i class="fa-solid fa-people-group"></i></div>
+            <div>
+              <div class="stat-big">444 mil</div>
+              <div class="stat-ctx">
+                Habitantes na região — uma população produtiva aguardando tecnologia local
+              </div>
+            </div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-icon-box"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <div class="stat-big">Guaraciaba</div>
+              <div class="stat-ctx">
+                Nossa origem — nascemos no coração da Serra para servir a Serra
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-final" id="contato">
+      <div class="cta-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1800&q=80&fit=crop"
+          alt="Campo agrícola ao entardecer"
+        />
+      </div>
+      <div class="cta-content reveal">
+        <span class="eyebrow-sm">Comece agora</span>
+        <h2>Sua lavoura merece<br /><em>mais do que um caderno.</em></h2>
+        <p class="cta-sub">Crie sua conta em menos de 2 minutos. Sem cartão de crédito.</p>
+        <div class="cta-btns">
+          <a href="#" class="btn-hero-primary"
+            ><i class="fa-solid fa-seedling"></i> Começar gratuitamente</a
+          >
+          <a href="#" class="btn-hero-ghost"
+            ><i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <a href="#" class="footer-logo">Ibicultivo<span>.</span></a>
+      <span class="footer-copy">© 2025 Ibicultivo · Guaraciaba do Norte — CE</span>
+      <div class="footer-links">
+        <a href="#">Termos</a>
+        <a href="#">Privacidade</a>
+        <a href="mailto:contato@ibicultivo.com.br">contato@ibicultivo.com.br</a>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              obs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+
+      // Navbar shadow on scroll
+      window.addEventListener("scroll", () => {
+        document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 60);
+      });
+
+      // Score ring animation
+      const scoreObs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              const fill = document.getElementById("scoreFill");
+              if (fill) setTimeout(() => (fill.style.strokeDashoffset = "50"), 300);
+              scoreObs.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+      const ring = document.getElementById("scoreRing");
+      if (ring) scoreObs.observe(ring);
+    </script>
+  </body>
 </html>
