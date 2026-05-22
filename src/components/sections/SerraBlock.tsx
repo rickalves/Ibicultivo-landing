@@ -3,97 +3,43 @@ import { serraNumbers } from "@/lib/constants";
 
 export default function SerraBlock() {
   return (
-    <div style={{ position: "relative", minHeight: 580, display: "flex", alignItems: "center", overflow: "hidden" }}>
+    <div className="relative flex min-h-[580px] items-center overflow-hidden">
       {/* Background image */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <div className="absolute inset-0 z-0">
         <Image
           src="/images/serra-paisagem.jpg"
           alt="Paisagem da Serra da Ibiapaba"
           fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
         />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(105deg, rgba(15,32,16,0.93) 0%, rgba(15,32,16,0.65) 55%, rgba(15,32,16,0.35) 100%)",
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(105deg,rgba(15,32,16,0.93)_0%,rgba(15,32,16,0.65)_55%,rgba(15,32,16,0.35)_100%)]" />
       </div>
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, padding: "4rem 5%", maxWidth: 660 }}>
-        <span
-          style={{
-            fontSize: "0.74rem",
-            fontWeight: 600,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#82C987",
-            marginBottom: "0.8rem",
-            display: "block",
-          }}
-        >
+      <div className="relative z-[2] max-w-[660px] px-[5%] py-16">
+        <span className="mb-[0.8rem] block text-[0.74rem] font-semibold tracking-[0.12em] text-g300 uppercase">
           Nossa região
         </span>
 
-        <h2
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "clamp(2rem, 4.5vw, 3.2rem)",
-            fontWeight: 700,
-            lineHeight: 1.08,
-            letterSpacing: "-0.03em",
-            color: "#fff",
-          }}
-        >
+        <h2 className="font-serif text-[clamp(2rem,4.5vw,3.2rem)] leading-[1.08] font-bold tracking-[-0.03em] text-white">
           A Serra da Ibiapaba
           <br />
-          <em style={{ fontStyle: "italic", color: "#F5B84A" }}>produz R$ 1,9 bilhão</em>
+          <em className="text-o300 italic">está no coração</em>
           <br />
-          por ano em agronegócio
+          do agronegócio cearense
         </h2>
 
-        <p
-          style={{
-            color: "rgba(255,255,255,0.5)",
-            fontSize: "0.98rem",
-            lineHeight: 1.75,
-            marginTop: "1rem",
-            maxWidth: 480,
-          }}
-        >
-          Maracujá, tomate, abacate, batata-doce — culturas que o Ibicultivo já atende. Uma região
-          que merecia uma ferramenta feita para ela.
+        <p className="mt-4 max-w-[480px] text-[0.98rem] leading-[1.75] text-white/50">
+          O Ceará produziu R$ 6,1 bilhões em agronegócio em 2024 — e 6 das 10 maiores cidades
+          produtoras estão na Ibiapaba. Maracujá, tomate, abacate, batata-doce: culturas que o
+          Ibicultivo já atende.
         </p>
 
-        <div
-          className="number-display"
-          style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2.5rem", marginTop: "2.5rem" }}
-        >
+        <div className="number-display mt-10 grid grid-cols-3 gap-10">
           {serraNumbers.map(({ val, label }) => (
             <div key={val}>
-              <div
-                style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontSize: "2.8rem",
-                  fontWeight: 700,
-                  color: "#82C987",
-                  lineHeight: 1,
-                }}
-              >
-                {val}
-              </div>
-              <div
-                style={{
-                  fontSize: "0.78rem",
-                  color: "rgba(255,255,255,0.45)",
-                  marginTop: 6,
-                  lineHeight: 1.45,
-                  whiteSpace: "pre-line",
-                }}
-              >
+              <div className="font-serif text-[2.8rem] leading-none font-bold text-g300">{val}</div>
+              <div className="mt-[6px] text-[0.78rem] leading-[1.45] whitespace-pre-line text-white/45">
                 {label}
               </div>
             </div>

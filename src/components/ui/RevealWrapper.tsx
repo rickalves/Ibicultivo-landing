@@ -9,7 +9,12 @@ interface RevealWrapperProps {
   style?: React.CSSProperties;
 }
 
-export default function RevealWrapper({ children, delay, className = "", style }: RevealWrapperProps) {
+export default function RevealWrapper({
+  children,
+  delay,
+  className = "",
+  style,
+}: RevealWrapperProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

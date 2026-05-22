@@ -5,104 +5,54 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSeedling } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import RevealWrapper from "@/components/ui/RevealWrapper";
+import { whatsappUrl } from "@/lib/constants";
 
 export default function CtaFinal() {
   return (
     <section
       id="contato"
-      style={{
-        position: "relative",
-        minHeight: 480,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        overflow: "hidden",
-      }}
+      className="relative flex min-h-[480px] items-center justify-center overflow-hidden text-center"
     >
       {/* Background image */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <div className="absolute inset-0 z-0">
         <Image
           src="/images/cta-verduras.jpg"
           alt="Campo agrícola ao entardecer"
           fill
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
         />
-        <div style={{ position: "absolute", inset: 0, background: "rgba(15,32,16,0.86)" }} />
+        <div className="absolute inset-0 bg-g900/86" />
       </div>
 
       {/* Content */}
-      <div style={{ position: "relative", zIndex: 2, padding: "4rem 2rem", maxWidth: 640 }}>
+      <div className="relative z-[2] max-w-[640px] px-8 py-16">
         <RevealWrapper>
-          <span style={{ fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#82C987", display: "block", textAlign: "center", marginBottom: "0.8rem" }}>
-            Comece agora
+          <span className="mb-[0.8rem] block text-center text-[0.74rem] font-semibold tracking-[0.12em] text-g300 uppercase">
+            Programa Piloto
           </span>
 
-          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#fff", marginBottom: "1rem" }}>
+          <h2 className="mb-4 font-serif text-[clamp(2rem,4vw,3.2rem)] leading-[1.08] font-bold tracking-[-0.03em] text-white">
             Sua lavoura merece
             <br />
-            <em style={{ fontStyle: "italic", color: "#F5B84A" }}>mais do que um caderno.</em>
+            <em className="text-o300 italic">mais do que um caderno.</em>
           </h2>
 
-          <p style={{ fontSize: "0.98rem", color: "rgba(255,255,255,0.52)", marginBottom: "2.5rem" }}>
-            Crie sua conta em menos de 2 minutos. Sem cartão de crédito.
+          <p className="mb-10 text-[0.98rem] text-white/[0.52]">
+            Seja um dos primeiros da Ibiapaba. Acesso gratuito durante o piloto.
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+          <div className="flex flex-col items-stretch gap-4 sm:flex-row sm:justify-center">
             <a
-              href="#"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.6rem",
-                background: "#E8962A",
-                color: "#0F1A10",
-                fontSize: "0.95rem",
-                fontWeight: 600,
-                padding: "0.9rem 2rem",
-                borderRadius: "var(--r-md)",
-                textDecoration: "none",
-                boxShadow: "0 4px 24px rgba(232,150,42,0.4)",
-                transition: "all 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "#d4821f";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,150,42,0.55)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "#E8962A";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 4px 24px rgba(232,150,42,0.4)";
-              }}
+              href="#piloto"
+              className="inline-flex items-center justify-center gap-[0.6rem] rounded-md bg-o400 px-8 py-[0.9rem] text-[0.95rem] font-semibold text-ink no-underline shadow-[0_4px_24px_rgba(232,150,42,0.4)] transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-[#d4821f] hover:shadow-[0_8px_32px_rgba(232,150,42,0.55)]"
             >
-              <FontAwesomeIcon icon={faSeedling} /> Começar gratuitamente
+              <FontAwesomeIcon icon={faSeedling} /> Quero participar do piloto
             </a>
             <a
-              href="#"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "0.6rem",
-                background: "rgba(255,255,255,0.1)",
-                border: "1.5px solid rgba(255,255,255,0.25)",
-                color: "#fff",
-                fontSize: "0.95rem",
-                fontWeight: 400,
-                padding: "0.9rem 2rem",
-                borderRadius: "var(--r-md)",
-                textDecoration: "none",
-                backdropFilter: "blur(8px)",
-                transition: "all 0.25s",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.18)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-[0.6rem] rounded-md border-[1.5px] border-white/25 bg-white/10 px-8 py-[0.9rem] text-[0.95rem] font-normal text-white no-underline backdrop-blur-[8px] transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-white/[0.18]"
             >
               <FontAwesomeIcon icon={faWhatsapp} /> Falar no WhatsApp
             </a>

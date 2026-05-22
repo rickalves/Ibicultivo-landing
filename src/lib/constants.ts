@@ -1,27 +1,35 @@
-// All static content extracted from ibicultivo-v3.html
+// All static content for ibicultivo landing page
+
+// URL do app (trocar pelo domínio definitivo quando disponível)
+export const appUrl = "https://app.ibicultivo.com.br";
+
+// Substitua pelo número real antes de publicar
+// Formato: https://wa.me/55DDD9XXXXXXXX?text=...
+export const whatsappUrl =
+  "https://wa.me/5588993260894?text=Olá!%20Tenho%20interesse%20em%20participar%20do%20programa%20piloto%20do%20Ibicultivo.";
 
 export const navLinks = [
   { href: "#funcionalidades", label: "Funcionalidades" },
   { href: "#como", label: "Como funciona" },
-  { href: "#planos", label: "Planos" },
+  { href: "#piloto", label: "Piloto" },
   { href: "#sobre", label: "Sobre" },
 ];
 
 export const proofItems = [
-  { num: "120+", label: "Produtores" },
-  { num: "50k", label: "Lotes rastreados" },
-  { num: "5", label: "Estados" },
+  { num: "6+", label: "Culturas com rastreabilidade obrigatória por lei" },
+  { num: "INC", label: "02/2018 · Conformidade regulatória exigida" },
+  { num: "Ibiapaba", label: "Serra · Ceará — nossa origem" },
   { num: "R$0", label: "Para começar" },
 ];
 
 export const stripItems = [
   { icon: "fa-route", text: "Rastreabilidade completa" },
   { icon: "fa-qrcode", text: "QR Code de origem" },
-  { icon: "fa-map-location-dot", text: "Gestão de lotes por mapa" },
-  { icon: "fa-chart-line", text: "Painel de indicadores" },
-  { icon: "fa-file-lines", text: "Relatórios de safra" },
+  { icon: "fa-file-lines", text: "Relatórios R-01 a R-06" },
   { icon: "fa-users", text: "Multi-produtor" },
-  { icon: "fa-wifi", text: "Funciona offline" },
+  { icon: "fa-shield-halved", text: "Registro com CREA vinculado" },
+  { icon: "fa-bell", text: "Alertas de carência" },
+  { icon: "fa-tag", text: "Etiquetas ZPL por Bluetooth" },
   { icon: "fa-leaf", text: "Feito no Ceará" },
 ];
 
@@ -29,21 +37,22 @@ export const agricultorFeatures = [
   "Cadastro pelo celular em minutos",
   "Registro de plantio, insumos e colheita",
   "QR Code de origem para valorizar a venda",
-  "Funciona com internet fraca ou offline",
+  "Registro de expedições com nota fiscal e placa",
+  "Impressão de etiquetas ZPL via Bluetooth",
 ];
 
 export const tecnicoFeatures = [
   "Painel multi-produtor consolidado",
-  "Alertas de anomalias por lote",
+  "Alertas automáticos de carência de defensivos",
   "Exportação para laudos técnicos",
-  "API para cooperativas e sistemas externos",
+  "Registro com CREA e número ART vinculados",
 ];
 
 export const steps = [
   {
     icon: "fa-house",
     title: "Cadastre sua propriedade",
-    desc: "Registre seus lotes e cultivos no mapa. Simples como tirar uma foto.",
+    desc: "Registre seus lotes e cultivos. Simples como tirar uma foto.",
   },
   {
     icon: "fa-pen-to-square",
@@ -63,15 +72,33 @@ export const steps = [
 ];
 
 export const serraNumbers = [
-  { val: "R$1,9B", label: "Valor da produção\nagrícola em 2023" },
-  { val: "444k", label: "Habitantes na\nSerra da Ibiapaba" },
-  { val: "26k+", label: "Empresas ativas\nna região" },
+  { val: "R$ 6,1bi", label: "Produção agrícola\ndo Ceará em 2024\n· IBGE/PAM 2024" },
+  { val: "444.648", label: "Habitantes na\nSerra da Ibiapaba\n· IPECE/2025" },
+  { val: "26.675", label: "Empresas ativas\nna região\n· Receita Federal/2026" },
 ];
 
 export const bentoLotes = [
-  { dot: "green", name: "Tomate Italiano", area: "2,4 ha", tag: "Crescendo", tagType: "green" as const },
-  { dot: "orange", name: "Abacate Hass", area: "1,8 ha", tag: "Colheita próx.", tagType: "orange" as const },
-  { dot: "green", name: "Maracujá Azedo", area: "3,1 ha", tag: "Monitorando", tagType: "green" as const },
+  {
+    dot: "green",
+    name: "Tomate Italiano",
+    area: "2,4 ha",
+    tag: "Crescendo",
+    tagType: "green" as const,
+  },
+  {
+    dot: "orange",
+    name: "Abacate Hass",
+    area: "1,8 ha",
+    tag: "Colheita próx.",
+    tagType: "orange" as const,
+  },
+  {
+    dot: "green",
+    name: "Maracujá Azedo",
+    area: "3,1 ha",
+    tag: "Monitorando",
+    tagType: "green" as const,
+  },
   { dot: "blue", name: "Batata-doce", area: "0,9 ha", tag: "Plantio", tagType: "green" as const },
 ];
 
@@ -88,84 +115,36 @@ export const bentoBarHeights = [
 
 export const tecnicoFeatureList = [
   {
-    icon: "fa-table-columns",
-    title: "Painel multi-produtor",
-    desc: "Todos os produtores em uma visão única, com alertas de anomalias em tempo real.",
+    icon: "fa-shield-halved",
+    title: "Registro imutável com CREA vinculado",
+    desc: "Cada aplicação de defensivo fica vinculada ao seu nome e número de CREA. Nenhum produtor pode editar ou apagar.",
+  },
+  {
+    icon: "fa-bell",
+    title: "Alertas automáticos de carência",
+    desc: "O sistema calcula e alerta quando um lote vai ser colhido antes do prazo de carência do defensivo registrado.",
   },
   {
     icon: "fa-file-export",
-    title: "Relatórios para laudos técnicos",
-    desc: "Exporte dados de insumos, colheita e produtividade em PDF direto para o laudo.",
-  },
-  {
-    icon: "fa-plug",
-    title: "API para cooperativas",
-    desc: "Integre com os sistemas da sua cooperativa ou associação de produtores.",
-  },
-];
-
-export const plans = [
-  {
-    icon: "fa-seedling",
-    type: "Gratuito",
-    price: "R$ 0",
-    period: "/mês, para sempre",
-    features: [
-      "Até 2 cultivos ativos",
-      "Até 10 lotes/mês",
-      "QR Code de origem básico",
-      "Suporte por WhatsApp",
-    ],
-    cta: "Criar conta grátis",
-    mid: false,
-  },
-  {
-    icon: "fa-rocket",
-    type: "Pro",
-    price: "R$ 49",
-    period: "/mês por produtor",
-    features: [
-      "Cultivos e lotes ilimitados",
-      "Dashboard de indicadores",
-      "Relatórios exportáveis",
-      "QR Code personalizado",
-      "Suporte prioritário",
-    ],
-    cta: "Assinar Pro",
-    mid: true,
-    badge: "Mais popular",
-  },
-  {
-    icon: "fa-handshake",
-    type: "Cooperativa",
-    price: "Sob consulta",
-    period: "para equipes e cooperativas",
-    features: [
-      "Multi-produtor ilimitado",
-      "API e integrações",
-      "Treinamento presencial",
-      "SLA e suporte dedicado",
-    ],
-    cta: "Falar com a equipe",
-    mid: false,
-    smallPrice: true,
+    title: "Relatórios R-01 a R-06 em 1 clique",
+    desc: "Conformes à INC 02/2018 e Lei 7.802/1989. Sem copiar dado de planilha.",
   },
 ];
 
 export const originStats = [
   {
     icon: "fa-mountain-sun",
-    val: "R$ 1,9B",
-    ctx: "Valor da produção agrícola da Serra da Ibiapaba em 2023, segundo IBGE/SEBRAE",
+    val: "R$ 6,1bi",
+    ctx: "Produção agrícola do Ceará em 2024 — crescimento de 22,9% vs 2023 · IBGE/PAM 2024",
   },
   {
     icon: "fa-people-group",
     val: "444 mil",
-    ctx: "Habitantes na região — uma população produtiva aguardando tecnologia local",
+    ctx: "Habitantes na Serra da Ibiapaba · IPECE/2025",
   },
   {
     icon: "fa-location-dot",
     val: "Guaraciaba",
-    ctx: "Nossa origem — nascemos no coração da Serra para servir a Serra",
+    ctx: "Nossa origem — R$ 381 mi em produção em 2024, maior município produtor do Ceará · IBGE/PAM 2024",
   },
 ];

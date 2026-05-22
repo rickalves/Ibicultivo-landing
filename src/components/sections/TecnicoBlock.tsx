@@ -2,114 +2,67 @@
 
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTableColumns, faFileExport, faPlug, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faShieldHalved,
+  faBell,
+  faFileExport,
+  faArrowRight,
+} from "@fortawesome/free-solid-svg-icons";
 import { tecnicoFeatureList } from "@/lib/constants";
 
 const iconMap = {
-  "fa-table-columns": faTableColumns,
+  "fa-shield-halved": faShieldHalved,
+  "fa-bell": faBell,
   "fa-file-export": faFileExport,
-  "fa-plug": faPlug,
 };
 
 export default function TecnicoBlock() {
   return (
-    <div className="tecnico-block" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", minHeight: 580 }}>
+    <div className="tecnico-block grid min-h-[580px] grid-cols-2">
       {/* Photo */}
-      <div className="tec-photo" style={{ position: "relative", overflow: "hidden", minHeight: 400 }}>
+      <div className="tec-photo relative min-h-[400px] overflow-hidden">
         <Image
           src="/images/plantacao-tomate.jpg"
           alt="Plantação de tomate na Serra da Ibiapaba"
           fill
-          style={{ objectFit: "cover", objectPosition: "center top" }}
+          className="object-cover object-top"
         />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, rgba(15,32,16,0.25), transparent)",
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,32,16,0.25),transparent)]" />
       </div>
 
       {/* Content */}
-      <div
-        style={{
-          background: "#0F2010",
-          padding: "5rem 4rem",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        <span style={{ fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#82C987", marginBottom: "0.8rem", display: "block" }}>
+      <div className="flex flex-col justify-center bg-g900 px-16 py-20">
+        <span className="mb-[0.8rem] block text-[0.74rem] font-semibold tracking-[0.12em] text-g300 uppercase">
           Para o técnico agrícola
         </span>
 
-        <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#fff" }}>
+        <h2 className="font-serif text-[clamp(1.8rem,3vw,2.6rem)] leading-[1.08] font-bold tracking-[-0.03em] text-white">
           Monitore dezenas de
           <br />
-          <em style={{ fontStyle: "italic", color: "#F5B84A" }}>produtores</em> de uma tela
+          <em className="text-o300 italic">produtores</em> de uma tela
         </h2>
 
-        <p style={{ fontSize: "1rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.75, maxWidth: 400, marginTop: "0.9rem", marginBottom: "2.5rem" }}>
+        <p className="mt-[0.9rem] mb-10 max-w-[400px] text-base leading-[1.75] text-white/50">
           Chega de planilha. O Ibicultivo centraliza todos os seus produtores com dados reais.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem", marginBottom: "2.5rem" }}>
+        <div className="mb-10 flex flex-col gap-[1.2rem]">
           {tecnicoFeatureList.map((feat) => (
-            <div key={feat.title} style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
-              <div
-                style={{
-                  width: 42,
-                  height: 42,
-                  flexShrink: 0,
-                  borderRadius: "var(--r-sm)",
-                  background: "rgba(61,140,65,0.12)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1px solid rgba(61,140,65,0.2)",
-                  fontSize: "1rem",
-                  color: "#82C987",
-                }}
-              >
+            <div key={feat.title} className="flex items-start gap-4">
+              <div className="flex size-[42px] shrink-0 items-center justify-center rounded-sm border border-g500/20 bg-g500/12 text-base text-g300">
                 <FontAwesomeIcon icon={iconMap[feat.icon as keyof typeof iconMap]} />
               </div>
               <div>
-                <h4 style={{ fontSize: "0.88rem", fontWeight: 500, color: "#fff", marginBottom: 3 }}>{feat.title}</h4>
-                <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.55 }}>{feat.desc}</p>
+                <h4 className="mb-[3px] text-[0.88rem] font-medium text-white">{feat.title}</h4>
+                <p className="text-[0.78rem] leading-[1.55] text-white/[0.42]">{feat.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
         <a
-          href="#planos"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            width: "fit-content",
-            fontSize: "0.88rem",
-            fontWeight: 600,
-            color: "#fff",
-            padding: "0.55rem 1.4rem",
-            borderRadius: "var(--r-sm)",
-            background: "#235025",
-            textDecoration: "none",
-            boxShadow: "0 2px 12px rgba(45,107,48,0.25)",
-            transition: "all 0.2s",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "#2D6B30";
-            e.currentTarget.style.transform = "translateY(-1px)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(45,107,48,0.35)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "#235025";
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 2px 12px rgba(45,107,48,0.25)";
-          }}
+          href="#piloto"
+          className="inline-flex w-fit items-center gap-[0.4rem] rounded-sm bg-g700 px-[1.4rem] py-[0.55rem] text-[0.88rem] font-semibold text-white no-underline shadow-[0_2px_12px_rgba(45,107,48,0.25)] transition-all duration-200 hover:-translate-y-px hover:bg-g600 hover:shadow-[0_6px_20px_rgba(45,107,48,0.35)]"
         >
           Ver plano Cooperativa <FontAwesomeIcon icon={faArrowRight} />
         </a>

@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMountainSun, faPeopleGroup, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import RevealWrapper from "@/components/ui/RevealWrapper";
 import { originStats } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 const iconMap = {
   "fa-mountain-sun": faMountainSun,
@@ -12,51 +12,21 @@ const iconMap = {
 
 export default function Sobre() {
   return (
-    <section id="sobre" style={{ padding: "8rem 5%", background: "#F2EDE4", position: "relative", overflow: "hidden" }}>
+    <section id="sobre" className="relative overflow-hidden bg-parchment px-[5%] py-32">
       <div className="sobre-orb" />
 
-      <div className="sobre-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "5rem", alignItems: "center" }}>
-
-        {/* Quote block */}
+      <div className="sobre-grid grid grid-cols-2 items-center gap-20">
+        {/* Founder quote */}
         <RevealWrapper>
-          <div style={{ position: "relative" }}>
-            <div
-              className="quote-mark"
-              style={{ fontFamily: "var(--font-cormorant), serif" }}
-            >
-              &ldquo;
-            </div>
-            <p
-              style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontSize: "1.5rem",
-                fontWeight: 400,
-                fontStyle: "italic",
-                color: "#0F1A10",
-                lineHeight: 1.55,
-                paddingLeft: "2rem",
-                marginBottom: "2rem",
-                position: "relative",
-                zIndex: 1,
-              }}
-            >
-              Antes eu não sabia quanto cada lote me dava de lucro. Com o Ibicultivo, consigo
-              comparar safra por safra e vender o tomate com mais valor porque o comprador vê de
-              onde vem.
+          <div className="relative">
+            <div className="quote-mark font-serif" />
+            <p className="relative z-[1] mb-8 pl-8 font-serif text-2xl leading-[1.55] font-normal text-ink italic">
+              Nascemos na Serra da Ibiapaba. Vimos de perto como um produtor de tomate perde a venda
+              por não ter como provar de onde vem. O Ibicultivo foi construído para mudar isso.
             </p>
-            <div style={{ paddingLeft: "2rem", display: "flex", alignItems: "center", gap: "1rem" }}>
-              <div style={{ width: 48, height: 48, borderRadius: "50%", overflow: "hidden", border: "2px solid #82C987", flexShrink: 0, position: "relative" }}>
-                <Image
-                  src="/images/avatar-agricultor.jpg"
-                  alt="Produtor Francisco Alves"
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-              <div>
-                <p style={{ fontSize: "0.88rem", fontWeight: 600, color: "#0F1A10" }}>Francisco Alves</p>
-                <p style={{ fontSize: "0.75rem", color: "#5A6B5C" }}>Produtor de tomate · São Benedito — CE</p>
-              </div>
+            <div className="pl-8">
+              <p className="text-[0.88rem] font-semibold text-ink">Time Ibicultivo</p>
+              <p className="text-[0.75rem] text-muted">Guaraciaba do Norte — CE</p>
             </div>
           </div>
         </RevealWrapper>
@@ -67,39 +37,20 @@ export default function Sobre() {
             {originStats.map((stat, i) => (
               <div
                 key={stat.val}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1.5rem",
-                  padding: "1.6rem 0",
-                  borderBottom: i < originStats.length - 1 ? "1px solid rgba(45,107,48,0.1)" : "none",
-                  paddingTop: i === 0 ? 0 : "1.6rem",
-                }}
+                className={cn(
+                  "flex items-center gap-6 pb-[1.6rem]",
+                  i > 0 && "pt-[1.6rem]",
+                  i < originStats.length - 1 && "border-b border-g600/10"
+                )}
               >
-                <div
-                  style={{
-                    width: 46,
-                    height: 46,
-                    borderRadius: 10,
-                    flexShrink: 0,
-                    background: "#E8F5E9",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1rem",
-                    color: "#2D6B30",
-                    border: "1px solid rgba(45,107,48,0.15)",
-                  }}
-                >
+                <div className="flex size-[46px] shrink-0 items-center justify-center rounded-[10px] border border-g600/15 bg-g100 text-base text-g600">
                   <FontAwesomeIcon icon={iconMap[stat.icon as keyof typeof iconMap]} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "1.8rem", fontWeight: 700, color: "#235025", lineHeight: 1 }}>
+                  <div className="font-serif text-[1.8rem] leading-none font-bold text-g700">
                     {stat.val}
                   </div>
-                  <div style={{ fontSize: "0.78rem", color: "#5A6B5C", lineHeight: 1.5, marginTop: 3 }}>
-                    {stat.ctx}
-                  </div>
+                  <div className="mt-[3px] text-[0.78rem] leading-[1.5] text-muted">{stat.ctx}</div>
                 </div>
               </div>
             ))}

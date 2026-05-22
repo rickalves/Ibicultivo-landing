@@ -1,175 +1,136 @@
 "use client";
 
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSeedling, faRocket, faHandshake, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import RevealWrapper from "@/components/ui/RevealWrapper";
-import { plans } from "@/lib/constants";
 
-const iconMap = {
-  "fa-seedling": faSeedling,
-  "fa-rocket": faRocket,
-  "fa-handshake": faHandshake,
-};
+const pilotoBenefits = [
+  "Acesso gratuito completo durante o piloto",
+  "Suporte direto com a equipe via WhatsApp",
+  "Sua opinião molda o produto final",
+];
+
+const pilotoFields = [
+  { name: "nome", label: "Nome completo", placeholder: "João Silva", type: "text" },
+  { name: "municipio", label: "Município", placeholder: "São Benedito", type: "text" },
+  { name: "cultura", label: "Cultura principal", placeholder: "Tomate, maracujá...", type: "text" },
+  { name: "telefone", label: "WhatsApp", placeholder: "(85) 9 9999-9999", type: "tel" },
+] as const;
+
+type FormState = { nome: string; municipio: string; cultura: string; telefone: string };
 
 export default function Plans() {
-  return (
-    <section id="planos" style={{ padding: "8rem 5%", background: "#FAF7F2" }}>
-      <RevealWrapper>
-        <div style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <span style={{ fontSize: "0.74rem", fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase", color: "#3D8C41", marginBottom: "0.8rem", display: "block", textAlign: "center" }}>
-            Planos e preços
-          </span>
-          <h2 style={{ fontFamily: "var(--font-cormorant), serif", fontSize: "clamp(2rem, 4vw, 3.2rem)", fontWeight: 700, lineHeight: 1.08, letterSpacing: "-0.03em", color: "#0F1A10", textAlign: "center" }}>
-            Comece grátis. <em style={{ fontStyle: "italic", color: "#2D6B30" }}>Cresça no seu ritmo.</em>
-          </h2>
-          <p style={{ fontSize: "1rem", color: "#5A6B5C", lineHeight: 1.75, maxWidth: 520, marginTop: "0.9rem", margin: "0.9rem auto 0" }}>
-            Sem fidelidade. Cancele quando quiser. Suporte em português.
-          </p>
-        </div>
-      </RevealWrapper>
+  const [form, setForm] = useState<FormState>({
+    nome: "",
+    municipio: "",
+    cultura: "",
+    telefone: "",
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-      <div className="plans-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "3rem", maxWidth: 1200, margin: "0 auto" }}>
-        {plans.map((plan, i) => (
-          <RevealWrapper key={plan.type} delay={(i + 1) as 1 | 2 | 3}>
-            <PlanCard plan={plan} />
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus("sending");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, origem: "programa-piloto" }),
+      });
+      if (!res.ok) throw new Error();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  return (
+    <section id="piloto" className="bg-g800 px-[5%] py-32">
+      <div className="mx-auto max-w-[960px]">
+        <RevealWrapper>
+          <div className="mb-[4.5rem] text-center">
+            <span className="mb-[0.8rem] block text-[0.74rem] font-semibold tracking-[0.12em] text-g300 uppercase">
+              Programa Piloto
+            </span>
+            <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] leading-[1.08] font-bold tracking-[-0.03em] text-white">
+              Seja o primeiro da
+              <br />
+              <em className="text-o300 italic">sua região</em>
+            </h2>
+            <p className="mx-auto mt-[0.9rem] max-w-[560px] text-base leading-[1.75] text-white/55">
+              Estamos selecionando os primeiros produtores e técnicos da Serra da Ibiapaba para
+              testar a plataforma gratuitamente e ajudar a construir a ferramenta ideal para a nossa
+              região.
+            </p>
+          </div>
+        </RevealWrapper>
+
+        <div className="plans-row grid grid-cols-2 items-start gap-20">
+          {/* Benefits */}
+          <RevealWrapper delay={1}>
+            <div>
+              {pilotoBenefits.map((text) => (
+                <div key={text} className="mb-8 flex items-start gap-4">
+                  <div className="flex size-[30px] shrink-0 items-center justify-center rounded-full border border-g300/30 bg-g300/15 text-[0.75rem] text-g300">
+                    <FontAwesomeIcon icon={faCheck} />
+                  </div>
+                  <p className="mt-1 text-[1.05rem] leading-[1.6] text-white/75">{text}</p>
+                </div>
+              ))}
+            </div>
           </RevealWrapper>
-        ))}
+
+          {/* Form */}
+          <RevealWrapper delay={2}>
+            {status === "sent" ? (
+              <div className="rounded-lg border border-g300/25 bg-g300/[0.08] p-12 text-center">
+                <div className="mb-4 text-[2.5rem] text-g300">✓</div>
+                <h3 className="mb-[0.6rem] font-serif text-[1.6rem] text-white">
+                  Recebemos sua inscrição!
+                </h3>
+                <p className="text-[0.9rem] text-white/50">
+                  Entraremos em contato pelo WhatsApp em breve.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
+                className="rounded-lg border border-white/10 bg-white/[0.04] p-10"
+              >
+                {pilotoFields.map(({ name, label, placeholder, type }) => (
+                  <div key={name} className="mb-[1.2rem]">
+                    <label className="mb-[0.4rem] block text-[0.78rem] font-medium tracking-[0.04em] text-white/50">
+                      {label}
+                    </label>
+                    <input
+                      required
+                      type={type}
+                      placeholder={placeholder}
+                      value={form[name]}
+                      onChange={(e) => setForm((f) => ({ ...f, [name]: e.target.value }))}
+                      className="box-border w-full rounded-sm border border-white/12 bg-white/[0.06] px-4 py-3 text-[0.9rem] text-white transition-colors duration-200 outline-none placeholder:text-white/30 focus:border-g300/50 focus:outline-none"
+                    />
+                  </div>
+                ))}
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="mt-[0.4rem] flex w-full cursor-pointer items-center justify-center gap-[0.6rem] rounded-md bg-o400 px-8 py-[0.9rem] text-[0.95rem] font-semibold text-ink shadow-[0_4px_24px_rgba(232,150,42,0.3)] transition-colors duration-200 hover:bg-[#d4821f] disabled:cursor-wait"
+                >
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                  {status === "sending" ? "Enviando..." : "Quero participar do piloto"}
+                </button>
+                {status === "error" && (
+                  <p className="mt-[0.8rem] text-center text-[0.8rem] text-o300">
+                    Algo deu errado. Tente novamente ou fale por WhatsApp.
+                  </p>
+                )}
+              </form>
+            )}
+          </RevealWrapper>
+        </div>
       </div>
     </section>
-  );
-}
-
-function PlanCard({ plan }: { plan: typeof plans[0] }) {
-  const isMid = plan.mid;
-
-  return (
-    <div
-      style={{
-        borderRadius: "var(--r-lg)",
-        border: isMid ? "1px solid #2D6B30" : "1px solid rgba(45,107,48,0.12)",
-        padding: "2.2rem",
-        position: "relative",
-        overflow: "hidden",
-        transition: "transform 0.3s, box-shadow 0.3s",
-        background: isMid ? "#1A3A1C" : "#FAF7F2",
-        height: "100%",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = "translateY(-4px)";
-        e.currentTarget.style.boxShadow = "0 20px 48px rgba(15,32,16,0.09)";
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = "translateY(0)";
-        e.currentTarget.style.boxShadow = "none";
-      }}
-    >
-      {/* Badge */}
-      {"badge" in plan && plan.badge && (
-        <span
-          style={{
-            position: "absolute",
-            top: -1,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "linear-gradient(90deg, #C87820, #E8962A)",
-            color: "#fff",
-            fontSize: "0.68rem",
-            fontWeight: 600,
-            letterSpacing: "0.04em",
-            padding: "4px 16px",
-            borderRadius: "0 0 var(--r-sm) var(--r-sm)",
-          }}
-        >
-          {plan.badge}
-        </span>
-      )}
-
-      {/* Icon */}
-      <div
-        style={{
-          width: 44,
-          height: 44,
-          borderRadius: 10,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: "1.2rem",
-          fontSize: "1rem",
-          background: isMid ? "rgba(130,201,135,0.1)" : "#E8F5E9",
-          color: isMid ? "#82C987" : "#2D6B30",
-          border: isMid ? "1px solid rgba(130,201,135,0.2)" : "1px solid rgba(45,107,48,0.12)",
-        }}
-      >
-        <FontAwesomeIcon icon={iconMap[plan.icon as keyof typeof iconMap]} />
-      </div>
-
-      <p style={{ fontSize: "0.73rem", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.5rem", color: isMid ? "#82C987" : "#5A6B5C" }}>
-        {plan.type}
-      </p>
-
-      <p
-        style={{
-          fontFamily: "var(--font-cormorant), serif",
-          fontSize: ("smallPrice" in plan && plan.smallPrice) ? "1.7rem" : "2.6rem",
-          fontWeight: 700,
-          lineHeight: 1,
-          letterSpacing: "-0.03em",
-          marginBottom: "0.25rem",
-          color: isMid ? "#fff" : "#0F1A10",
-        }}
-      >
-        {plan.price}
-      </p>
-
-      <p style={{ fontSize: "0.78rem", marginBottom: "1.2rem", color: isMid ? "rgba(255,255,255,0.4)" : "#5A6B5C" }}>
-        {plan.period}
-      </p>
-
-      <div style={{ height: 1, margin: "1.2rem 0", background: isMid ? "rgba(255,255,255,0.1)" : "rgba(45,107,48,0.1)" }} />
-
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", marginBottom: "2rem" }}>
-        {plan.features.map((f) => (
-          <div key={f} style={{ display: "flex", alignItems: "center", gap: "0.6rem", fontSize: "0.82rem", color: isMid ? "rgba(255,255,255,0.78)" : "#0F1A10" }}>
-            <FontAwesomeIcon icon={faCheck} style={{ fontSize: "0.72rem", width: 18, textAlign: "center", flexShrink: 0, color: isMid ? "#82C987" : "#3D8C41" }} />
-            {f}
-          </div>
-        ))}
-      </div>
-
-      <a
-        href="#"
-        style={{
-          display: "block",
-          textAlign: "center",
-          padding: "0.85rem",
-          borderRadius: "var(--r-sm)",
-          fontWeight: 600,
-          fontSize: "0.88rem",
-          textDecoration: "none",
-          transition: "all 0.2s",
-          ...(isMid
-            ? { background: "linear-gradient(135deg, #C87820, #E8962A)", color: "#fff", boxShadow: "0 4px 20px rgba(200,120,32,0.35)" }
-            : { background: "#F2EDE4", color: "#235025", border: "1.5px solid rgba(45,107,48,0.18)" }),
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          if (isMid) {
-            e.currentTarget.style.boxShadow = "0 8px 28px rgba(200,120,32,0.5)";
-          } else {
-            e.currentTarget.style.background = "#e8ddd0";
-          }
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          if (isMid) {
-            e.currentTarget.style.boxShadow = "0 4px 20px rgba(200,120,32,0.35)";
-          } else {
-            e.currentTarget.style.background = "#F2EDE4";
-          }
-        }}
-      >
-        {plan.cta}
-      </a>
-    </div>
   );
 }

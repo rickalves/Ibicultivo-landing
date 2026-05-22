@@ -4,21 +4,9 @@ interface ChartBarsProps {
 
 export default function ChartBars({ bars }: ChartBarsProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "flex-end",
-        gap: 5,
-        height: 72,
-        paddingTop: "1.2rem",
-      }}
-    >
+    <div className="flex h-[72px] items-end gap-[5px] pt-[1.2rem]">
       {bars.map((bar, i) => (
-        <div
-          key={i}
-          className={`bar${bar.highlight ? " hi" : ""}`}
-          style={{ height: bar.height }}
-        />
+        <div key={i} className={`bar${bar.highlight ? "hi" : ""}`} style={{ height: bar.height }} />
       ))}
     </div>
   );

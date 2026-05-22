@@ -4,233 +4,83 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faSeedling, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { proofItems } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 export default function Hero() {
   return (
-    <section
-      className="hero-section"
-      style={{
-        minHeight: "100vh",
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        overflow: "hidden",
-      }}
-    >
+    <section className="hero-section relative flex min-h-screen flex-col overflow-hidden">
       {/* Background image */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero.jpg"
           alt="Campo agrícola verde"
           fill
           priority
-          style={{ objectFit: "cover", objectPosition: "center" }}
+          className="object-cover object-center"
         />
         {/* Overlay */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, rgba(15,32,16,0.88) 0%, rgba(26,58,28,0.75) 45%, rgba(26,58,28,0.50) 70%, rgba(15,32,16,0.70) 100%)",
-          }}
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(15,32,16,0.88)_0%,rgba(26,58,28,0.75)_45%,rgba(26,58,28,0.50)_70%,rgba(15,32,16,0.70)_100%)]" />
       </div>
 
       {/* Content */}
-      <div
-        className="hero-content"
-        style={{
-          position: "relative",
-          zIndex: 2,
-          padding: "0 5%",
-          paddingTop: 90,
-          paddingBottom: 16,
-          maxWidth: 780,
-        }}
-      >
+      <div className="hero-content relative z-[2] flex max-w-[780px] flex-1 flex-col justify-center px-[5%] pt-[90px] pb-4">
         {/* Eyebrow */}
-        <div
-        className="hero-Eyebrow"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.6rem",
-            background: "rgba(232,150,42,0.15)",
-            border: "1px solid rgba(232,150,42,0.4)",
-            color: "#F5B84A",
-            fontSize: "0.78rem",
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            padding: "0.4rem 1rem",
-            borderRadius: 100,
-            marginBottom: "2rem",
-            animation: "fadeUp 0.6s ease 0.1s both",
-          }}
-        >
-          <span className="animate-breathe-fast" style={{ 
-            width: 6, 
-            height: 6, 
-            borderRadius: "50%", 
-            background: "#F5B84A", 
-            flexShrink: 0, 
-            display: "inline-block" }} />
+        <div className="hero-Eyebrow animate-fade-up-d1 mb-8 inline-flex items-center gap-[0.6rem] rounded-full border border-o400/40 bg-o400/15 px-4 py-[0.4rem] text-[0.78rem] font-medium tracking-[0.08em] text-o300 uppercase">
+          <span className="animate-breathe-fast inline-block size-[6px] shrink-0 rounded-full bg-o300" />
           <FontAwesomeIcon icon={faLocationDot} />
           Feito na Serra da Ibiapaba — Ceará
         </div>
 
         {/* H1 */}
-        <h1
-          className="hero-title"
-          style={{
-            fontFamily: "var(--font-cormorant), serif",
-            fontSize: "clamp(3rem, 6.5vw, 5.8rem)",
-            fontWeight: 700,
-            lineHeight: 1.0,
-            letterSpacing: "-0.03em",
-            color: "#fff",
-            marginBottom: "1.6rem",
-            animation: "fadeUp 0.6s ease 0.2s both",
-          }}
-        >
+        <h1 className="hero-title animate-fade-up-d2 mb-[1.6rem] font-serif text-[clamp(3rem,6.5vw,5.8rem)] leading-none font-bold tracking-[-0.03em] text-white">
           Sua lavoura
           <br />
-          <em style={{ fontStyle: "italic", color: "#82C987" }}>organizada.</em>
+          <em className="text-g300 italic">organizada.</em>
           <br />
           Sua colheita
           <br />
-          <span style={{ color: "#F5B84A" }}>valorizada.</span>
+          <span className="text-o300">valorizada.</span>
         </h1>
 
         {/* Sub */}
-        <p
-          className="hero-sub"
-          style={{
-            fontSize: "1.1rem",
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.72)",
-            lineHeight: 1.75,
-            maxWidth: 520,
-            marginBottom: "2.5rem",
-            animation: "fadeUp 0.6s ease 0.3s both",
-          }}
-        >
-          Plataforma de gestão e rastreabilidade agrícola criada para produtores e técnicos da
-          Serra da Ibiapaba. Do plantio ao QR Code de origem, tudo em um lugar.
+        <p className="hero-sub animate-fade-up-d3 mb-10 max-w-[520px] text-[1.1rem] leading-[1.75] font-light text-white/[0.72]">
+          Plataforma de gestão e rastreabilidade agrícola criada para produtores e técnicos da Serra
+          da Ibiapaba. Do plantio ao QR Code de origem, tudo em um lugar.
         </p>
 
         {/* CTAs */}
-        <div
-          className="hero-ctas"
-          style={{
-            display: "flex",
-            gap: "1rem",
-            flexWrap: "wrap",
-            marginBottom: "3.5rem",
-            animation: "fadeUp 0.6s ease 0.4s both",
-          }}
-        >
+        <div className="hero-ctas animate-fade-up-d4 flex flex-wrap gap-4">
           <a
-            href="#"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.6rem",
-              background: "#E8962A",
-              color: "#0F1A10",
-              fontSize: "0.95rem",
-              fontWeight: 600,
-              padding: "0.9rem 2rem",
-              borderRadius: "var(--r-md)",
-              textDecoration: "none",
-              boxShadow: "0 4px 24px rgba(232,150,42,0.4)",
-              transition: "all 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#d4821f";
-              e.currentTarget.style.transform = "translateY(-2px)";
-              e.currentTarget.style.boxShadow = "0 8px 32px rgba(232,150,42,0.55)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#E8962A";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 4px 24px rgba(232,150,42,0.4)";
-            }}
+            href="#piloto"
+            className="inline-flex items-center gap-[0.6rem] rounded-md bg-o400 px-8 py-[0.9rem] text-[0.95rem] font-semibold text-ink no-underline shadow-[0_4px_24px_rgba(232,150,42,0.4)] transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-[#d4821f] hover:shadow-[0_8px_32px_rgba(232,150,42,0.55)]"
           >
-            <FontAwesomeIcon icon={faSeedling} /> Começar gratuitamente
+            <FontAwesomeIcon icon={faSeedling} /> Participar do piloto
           </a>
           <a
             href="#como"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.6rem",
-              background: "rgba(255,255,255,0.1)",
-              border: "1.5px solid rgba(255,255,255,0.25)",
-              color: "#fff",
-              fontSize: "0.95rem",
-              fontWeight: 400,
-              padding: "0.9rem 2rem",
-              borderRadius: "var(--r-md)",
-              textDecoration: "none",
-              backdropFilter: "blur(8px)",
-              transition: "all 0.25s",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.18)";
-              e.currentTarget.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "rgba(255,255,255,0.1)";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
+            className="inline-flex items-center gap-[0.6rem] rounded-md border-[1.5px] border-white/25 bg-white/10 px-8 py-[0.9rem] text-[0.95rem] font-normal text-white no-underline backdrop-blur-[8px] transition-all duration-[250ms] hover:-translate-y-0.5 hover:bg-white/[0.18]"
           >
             <FontAwesomeIcon icon={faPlay} /> Ver como funciona
           </a>
         </div>
+      </div>
 
-        {/* Proof bar */}
-        <div
-          className="hero-proof"
-          style={{
-            display: "flex",
-            background: "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: "var(--r-md)",
-            width: "fit-content",
-            overflow: "hidden",
-            backdropFilter: "blur(12px)",
-            animation: "fadeUp 0.6s ease 0.5s both",
-          }}
-        >
-          {proofItems.map((item, i) => (
-            <div
-              key={item.label}
-              style={{
-                padding: "1rem 1.6rem",
-                display: "flex",
-                flexDirection: "column",
-                borderRight: i < proofItems.length - 1 ? "1px solid rgba(255,255,255,0.1)" : "none",
-              }}
-            >
-              <span
-                style={{
-                  fontFamily: "var(--font-cormorant), serif",
-                  fontSize: "1.8rem",
-                  fontWeight: 700,
-                  color: "#fff",
-                  lineHeight: 1,
-                }}
-              >
-                {item.num}
-              </span>
-              <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.5)", marginTop: 3 }}>
-                {item.label}
-              </span>
-            </div>
-          ))}
-        </div>
+      {/* Proof bar — full width, pinned to bottom */}
+      <div className="hero-proof animate-fade-up-d5 relative z-[2] flex w-full border-t border-white/12 bg-white/[0.07] backdrop-blur-[12px]">
+        {proofItems.map((item, i) => (
+          <div
+            key={item.label}
+            className={cn(
+              "flex flex-1 flex-col items-center px-[1.6rem] py-5",
+              i < proofItems.length - 1 && "border-r border-white/10"
+            )}
+          >
+            <span className="font-serif text-[1.8rem] leading-none font-bold text-white">
+              {item.num}
+            </span>
+            <span className="mt-[3px] text-[0.7rem] text-white/50">{item.label}</span>
+          </div>
+        ))}
       </div>
     </section>
   );
