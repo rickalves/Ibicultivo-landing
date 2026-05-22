@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 export default function Footer() {
   return (
     <footer className="flex flex-wrap items-center justify-between gap-4 bg-g900 px-[5%] py-[2.8rem]">
       <Link href="/" className="no-underline">
-        <span className="font-serif text-xl font-bold text-white">
-          Ibicultivo<span className="text-o400">.</span>
-        </span>
+        <Logo variant="dark" height={48} />
       </Link>
 
       <span className="text-[0.76rem] text-white/30">

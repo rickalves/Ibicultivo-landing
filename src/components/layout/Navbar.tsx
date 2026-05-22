@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import Logo from "@/components/ui/Logo";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -25,15 +25,8 @@ export default function Navbar() {
       )}
     >
       {/* Logo */}
-      <Link href="#" className="flex items-center no-underline">
-        <Image
-          src="/logo.svg"
-          alt="Ibicultivo"
-          width={120}
-          height={72}
-          priority
-          className="h-[72px] w-auto"
-        />
+      <Link href="/" className="flex items-center no-underline">
+        <Logo variant="light" height={64} />
       </Link>
 
       {/* Nav links */}

@@ -91,8 +91,8 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        agricultor: "border-g300/40 text-g200",
-        tecnico: "border-o400/40 text-o300",
+        agricultor: "border-g300/40 text-g500",
+        tecnico: "border-o400/40 text-o400",
       },
     },
   }
@@ -102,9 +102,9 @@ const overlayVariants = cva("absolute inset-0", {
   variants: {
     variant: {
       agricultor:
-        "bg-[linear-gradient(to_top,rgba(10,28,11,0.96)_0%,rgba(10,28,11,0.55)_50%,rgba(10,28,11,0.15)_100%)]",
+        "bg-[linear-gradient(to_top,rgba(10,28,11,1)_0%,rgba(10,28,11,0.82)_45%,rgba(10,28,11,0.35)_75%,rgba(10,28,11,0.08)_100%)]",
       tecnico:
-        "bg-[linear-gradient(to_top,rgba(20,48,22,0.96)_0%,rgba(20,48,22,0.50)_50%,rgba(20,48,22,0.12)_100%)]",
+        "bg-[linear-gradient(to_top,rgba(20,48,22,1)_0%,rgba(20,48,22,0.80)_45%,rgba(20,48,22,0.32)_75%,rgba(20,48,22,0.06)_100%)]",
     },
   },
 });
@@ -181,13 +181,15 @@ function AudCard({
           {title}
         </h3>
 
-        <p className="mb-[1.4rem] text-[0.87rem] leading-[1.7] text-white/[0.58]">{desc}</p>
+        <p className="mb-[1.4rem] text-[0.87rem] leading-[1.7] text-white/80 [text-shadow:0_1px_6px_rgba(0,0,0,0.6)]">
+          {desc}
+        </p>
 
         <div className="flex flex-col gap-[0.55rem]">
           {features.map((f) => (
             <div
               key={f}
-              className="flex items-center gap-[0.7rem] text-[0.82rem] text-white/[0.82]"
+              className="flex items-center gap-[0.7rem] text-[0.82rem] text-white/90 [text-shadow:0_1px_4px_rgba(0,0,0,0.5)]"
             >
               <div className={checkVariants({ variant })}>
                 <FontAwesomeIcon icon={faCheck} />
